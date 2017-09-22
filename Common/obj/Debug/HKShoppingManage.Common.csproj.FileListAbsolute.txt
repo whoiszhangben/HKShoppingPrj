@@ -1,0 +1,7 @@
+E:\港代项目\HKShoppingManage\Common\bin\Debug\HKShoppingManage.Common.dll
+E:\港代项目\HKShoppingManage\Common\bin\Debug\HKShoppingManage.Common.pdb
+E:\港代项目\HKShoppingManage\Common\bin\Debug\EmitMapper.dll
+E:\港代项目\HKShoppingManage\Common\bin\Debug\log4net.dll
+E:\港代项目\HKShoppingManage\Common\obj\Debug\HKShoppingManage.Common.dll
+E:\港代项目\HKShoppingManage\Common\obj\Debug\HKShoppingManage.Common.pdb
+E:\港代项目\HKShoppingManage\Common\obj\Debug\HKShoppingManage.Common.csprojResolveAssemblyReference.cache

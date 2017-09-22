@@ -1,0 +1,110 @@
+﻿@using System.Globalization
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="stylesheet" href="~/Content/styles.css" />
+        <link rel="stylesheet" href="~/Content/adminLTE/AdminLTE-2.3.0.min.css" />
+        <link rel="stylesheet" href="~/Content/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/Content/jquery-ui-themes/smoothness/jquery-ui-1.10.3.custom.min.css" />
+        <link rel="stylesheet" href="~/Content/fontAwesome/css/font-awesome-4.6.3.min.css" />
+        <link rel="stylesheet" href="~/Content/typeahead/typeahead.css" />
+        <link rel="stylesheet" href="~/Content/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" />
+        <link rel="stylesheet" href="~/Content/adminLTE/skins/_all-skins.min.css" />
+        <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/adminLTE/app.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/bootstrap/bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/admin.search.js"></script>
+        <script type="text/javascript" src="~/Scripts/admin.navigation.js"></script>
+        <script type="text/javascript" src="~/Scripts/admin.common.js"></script>
+        <script type="text/javascript" src="~/Scripts/typeahead/typeahead.bundle.min.js"></script>
+    </head>
+    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
+            <div class="main-header">
+                <span class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"></span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"></span>
+                </span>
+                <div class="navbar navbar-static-top" role="navigation">
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">&nbsp;</span>
+                    </a>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="account-info">
+                                张坤
+                            </li>
+                            <li>
+                                <a href="#">
+                                    注销
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="main-sidebar">
+                <div class="sidebar">
+                    <div class="sidebar-form">
+                        <div id="search-box">
+                            <input type="text" class="form-control admin-search-box typeahead" placeholder="菜单名称">
+                        </div>
+                    </div>
+                    <script>
+                        $(document).ready(function () {
+                            Admin.Search.init();
+                        });
+                    </script>
+                    @Html.Partial("Menu")
+                </div>
+            </div>
+            <div class="content-wrapper">
+                <div>
+                    @RenderBody()
+                </div>
+            </div>
+            <div class="main-footer clearfix">
+                <div class="pull-left">
+                    Powered by ZhangBen</a>
+                </div>
+                <div class="pull-right hidden-xs">
+                    <b>HKShoppingManage version 1.0.0</b>
+                </div>
+                <div class="text-center">
+                    @DateTime.Now.ToString("f")
+                </div>
+            </div>
+        </div>
+        <script>
+            var AdminLTEOptions = {
+                boxWidgetOptions: {
+                    boxWidgetIcons: {
+                        collapse: 'fa-minus',
+                        open: 'fa-plus'
+                    }
+                }
+            };
+        </script>
+        <a id="backTop" class="btn btn-back-top bg-teal"></a>
+        <script>
+            $(document).ready(function () {
+                $('#backTop').backTop();
+
+                $('a.sidebar-toggle').on('toggle', function () {
+                    var collapsed = $('body').hasClass('sidebar-collapse');
+                });
+            });
+        </script>
+    </body>
+</html>

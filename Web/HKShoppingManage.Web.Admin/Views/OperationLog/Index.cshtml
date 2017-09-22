@@ -1,0 +1,58 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "管理端操作日志";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section head {
+    <script src="~/Content/js/laydate/laydate.js" type="text/javascript"></script>
+    @Scripts.Render("~/resource/log_list_js")
+}
+@section foot {
+
+}
+
+<div class="path"><i class="icons"></i><a href="/Home/Index">首页</a>&nbsp;>&nbsp;管理端操作日志</div>
+<div class="searchBox">
+    <div class="searchItem fl">
+        起始日期：<input id="startDate" class="text_search laydate-icon" type="text" name="" value="">
+    </div>
+    <div class="searchItem fl">
+        结束日期：<input id="endDate" class="text_search laydate-icon" type="text" name="" value="">
+    </div>
+    <div class="searchItem fl">
+        日志类型：
+        <select id="logType" class="slt">
+            <option value="0">资产</option>
+        </select>
+    </div>
+    <div class="searchItem fl">
+        资产编号：<input id="NameOrCode" type="text" class="text_search" />
+    </div>
+    <div class="searchItem fl">
+        <input id="btnQuery" type="button" value="查询" class="fl searchCancel">
+        <input id="btnReset" type="button" value="重置" class="fl searchSure">
+    </div>
+</div>
+<div class="rightWapper">
+    <div class="rightView" style="left:1px;">
+        <div class="tableList">
+            <div class="tableHead">
+                <table cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td width="50">序号</td>
+                        <td width="80">日志类型</td>
+                        <td width="80">操作类型</td>
+                        <td>操作描述</td>
+                        <td width="150">操作时间</td>
+                        <td width="80">操作员</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="tableView mCustomScrollbar" data-mcs-theme="minimal-dark">
+                <table id="logList" cellpadding="0" cellspacing="0" width="100%"></table>
+                <div id="Pagination" class="pagination">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
