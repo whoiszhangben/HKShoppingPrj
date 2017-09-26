@@ -18,7 +18,7 @@ namespace HKShoppingManage.Web.Admin.Controllers
             this.bll = bll;
         }
         // GET: Login
-        public ActionResult Login()
+        public ActionResult Index()
         {
             return View();
         }
@@ -30,10 +30,8 @@ namespace HKShoppingManage.Web.Admin.Controllers
         /// <param name="loginPwd">登录密码</param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult Login(string loginCode, string loginPwd, string validateCode)
+        public JsonResult Index(string loginCode, string loginPwd)
         {
-            SessionCode code = SessionHelper.GetSession<SessionCode>("ValidateCode");
-
             #region 验证
             if (string.IsNullOrEmpty(loginCode))
             {
@@ -43,27 +41,15 @@ namespace HKShoppingManage.Web.Admin.Controllers
             {
                 return Json(new JsonModel(false, "11013"));//11013 密码不能为空!
             }
-            if (string.IsNullOrEmpty(validateCode))
-            {
-                return Json(new JsonModel(false, "11018"));//11016 验证码不能为空!
-            }
-            if (code == null || (DateTime.Now - code.Time).TotalMinutes > 2)
-            {
-                return Json(new JsonModel(false, "11020")); //验证码失效!
-            }
-            if (!validateCode.ToUpper().Equals(code.ValidateCode.ToUpper()))
-            {
-                return Json(new JsonModel(false, "11017"));//11017 验证码不匹配!
-            }
             #endregion
 
             SessionHelper.RemoveSession(SessionKey.ErrorCode);
 
             var setloginCode = AppSettingsHelper.GetStringByKey("loginCode", "admin");
-            var setloginPwd = AppSettingsHelper.GetStringByKey("loginPwd", "muchinfo");
+            var setloginPwd = AppSettingsHelper.GetStringByKey("loginPwd", "admin");
             if (loginCode == setloginCode && loginPwd == setloginPwd)
             {
-                var user = new User { LoginCode = loginCode, LoginPwd = loginPwd };
+                var user = new User { LoginCode = loginCode, LoginPwd = loginPwd, UserName = "张坤" };
                 SessionHelper.SetSession(SessionKey.UserInfo, user);
 
                 string url = "/Home/Index";
@@ -84,7 +70,7 @@ namespace HKShoppingManage.Web.Admin.Controllers
         {
             SessionHelper.RemoveSession(SessionKey.UserInfo);
             SessionHelper.RemoveSession(SessionKey.ErrorCode);
-            return RedirectToAction("Login");
+            return RedirectToAction("Index");
         }
 
         /// <summary>

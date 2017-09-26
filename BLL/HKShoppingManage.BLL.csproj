@@ -40,7 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetInfoBLL.cs" />
+    <Compile Include="CustomerBLL.cs" />
     <Compile Include="Interface\IAssetInfoBLL.cs" />
+    <Compile Include="Interface\ICustomerBLL.cs" />
     <Compile Include="Interface\IOperationLogBLL.cs" />
     <Compile Include="Interface\IUserBLL.cs" />
     <Compile Include="OperationLogBLL.cs" />

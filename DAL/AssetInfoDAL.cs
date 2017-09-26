@@ -206,7 +206,6 @@ namespace HKShoppingManage.DAL
         }
         #endregion
 
-
         #region 查
         /// <summary>
         /// 是否存在

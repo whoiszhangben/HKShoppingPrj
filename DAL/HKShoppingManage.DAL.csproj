@@ -44,7 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetInfoDAL.cs" />
+    <Compile Include="CustomerDAL.cs" />
     <Compile Include="Interface\IAssetInfoDAL.cs" />
+    <Compile Include="Interface\ICustomerDAL.cs" />
     <Compile Include="Interface\IOperationLogDAL.cs" />
     <Compile Include="Interface\IUserDAL.cs" />
     <Compile Include="OperationLogDAL.cs" />

@@ -50,6 +50,7 @@
     <Compile Include="Common\PagedList.cs" />
     <Compile Include="Common\PageParams.cs" />
     <Compile Include="Common\zTreeNode.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="OperationLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />

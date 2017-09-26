@@ -131,6 +131,8 @@
     <Compile Include="Common\FileUpload\FileUpLoadKeys.cs" />
     <Compile Include="Common\FileUpload\PostFile.cs" />
     <Compile Include="Common\HtmlHelperExtend.cs" />
+    <Compile Include="Common\LocalizedString.cs" />
+    <Compile Include="Common\PageHelperBuilder.cs" />
     <Compile Include="Common\MvcHelper.cs" />
     <Compile Include="Common\NewtonsoftJsonResult.cs" />
     <Compile Include="Common\OperationLogHelper.cs" />
@@ -142,9 +144,14 @@
     <Compile Include="Common\VerificationHelper.cs" />
     <Compile Include="Common\WatchHelper.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OperationLogController.cs" />
+    <Compile Include="Controllers\PurchaseController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +236,7 @@
     <Content Include="Content\fontAwesome\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\images\ajax-loading.gif" />
     <Content Include="Content\images\ajax_loader_small.gif" />
+    <Content Include="Content\images\carbon_fibre_big.png" />
     <Content Include="Content\images\google-maps.gif" />
     <Content Include="Content\images\logo - 副本.png" />
     <Content Include="Content\images\logo-mini.png" />
@@ -422,6 +430,7 @@
     <Content Include="Content\kendo\2014.1.318\Uniform\slider-v.gif" />
     <Content Include="Content\kendo\2014.1.318\Uniform\sprite.png" />
     <Content Include="Content\kendo\2014.1.318\Uniform\sprite_2x.png" />
+    <Content Include="Content\login.css" />
     <Content Include="Content\Roxy_Fileman\css\images\animated-overlay.gif" />
     <Content Include="Content\Roxy_Fileman\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\Roxy_Fileman\css\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -814,6 +823,7 @@
     <Content Include="Scripts\bootstrap\npm.js" />
     <Content Include="Scripts\chartjs\Chart.js" />
     <Content Include="Scripts\chartjs\Chart.min.js" />
+    <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\farbtastic.js" />
     <Content Include="Scripts\fineuploader\edit.gif" />
     <Content Include="Scripts\fineuploader\fineuploader-4.2.2.css" />
@@ -833,6 +843,7 @@
     <Content Include="Scripts\jquery-migrate-1.2.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.custom.js" />
     <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Scripts\jquery.pagination.js" />
     <Content Include="Scripts\jquery.tmpl.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -1259,6 +1270,8 @@
     <Content Include="Scripts\kendo\2014.1.318\kendo.view.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.web.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.window.min.js" />
+    <Content Include="Scripts\pageHelper.js" />
+    <Content Include="Scripts\StringHelper.js" />
     <Content Include="Scripts\tagEditor\jquery.caret.min.js" />
     <Content Include="Scripts\tagEditor\jquery.tag-editor.js" />
     <Content Include="Scripts\tagEditor\jquery.tag-editor.min.js" />
@@ -1327,7 +1340,6 @@
     <Content Include="Content\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Config\sitemap.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\OperationLog\Index.cshtml" />
     <Content Include="Scripts\fineuploader\LICENSE" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
@@ -1420,6 +1432,15 @@
     <Content Include="Views\Shared\_AdminPopupLayout.cshtml" />
     <Content Include="Views\Shared\_GridPagerMessages.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Customer\Index.cshtml" />
+    <Content Include="Views\Customer\Create.cshtml" />
+    <Content Include="Views\Customer\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
+    <Content Include="Views\Purchase\Index.cshtml" />
+    <Content Include="Views\Sale\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BLL\HKShoppingManage.BLL.csproj">

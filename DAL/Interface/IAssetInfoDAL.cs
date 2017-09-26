@@ -36,7 +36,6 @@ namespace HKShoppingManage.DAL
         Task<bool> Update(AssetInfo model);
         #endregion
 
-
         #region 查
         /// <summary>
         /// 是否存在

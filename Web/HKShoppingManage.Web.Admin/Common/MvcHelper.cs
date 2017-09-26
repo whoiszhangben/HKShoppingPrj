@@ -16,7 +16,7 @@ namespace HKShoppingManage.Web.Admin
         /// <summary>
         /// 登录页常量
         /// </summary>
-        public const string LoginUrl = "/Login/Login";
+        public const string LoginUrl = "/Login/Index";
 
         /// <summary>
         /// 系统名称

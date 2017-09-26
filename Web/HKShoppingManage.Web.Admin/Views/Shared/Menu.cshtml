@@ -7,19 +7,19 @@
 
 @helper RenderMenuItem(HKShoppingManage.Web.Admin.Menu.SiteMapNode item)
 {
-    string url = null;
-    if (!string.IsNullOrEmpty(item.ControllerName) && !string.IsNullOrEmpty(item.ActionName))
-    {
-        url = Url.Action(item.ActionName, item.ControllerName, item.RouteValues, null, null);
-    }
-    else if (!string.IsNullOrEmpty(item.Url))
-    {
-        url = item.Url.StartsWith("~/", StringComparison.Ordinal) ? Url.Content(item.Url) : item.Url;
-    }
-    var isActive = false;
+string url = null;
+if (!string.IsNullOrEmpty(item.ControllerName) && !string.IsNullOrEmpty(item.ActionName))
+{
+    url = Url.Action(item.ActionName, item.ControllerName, item.RouteValues, null, null);
+}
+else if (!string.IsNullOrEmpty(item.Url))
+{
+    url = item.Url.StartsWith("~/", StringComparison.Ordinal) ? Url.Content(item.Url) : item.Url;
+}
+var isActive = item.ContainsSystemName(Html.GetActiveMenuItemSystemName()); ;
 
-    if (!String.IsNullOrEmpty(url))
-    {
+if (!String.IsNullOrEmpty(url))
+{
         <li @(isActive ? Html.Raw("class=\"active current-active-item\"") : null)>
             <a href="@url" class="menu-item-link"@(item.OpenUrlInNewTab ? Html.Raw(" target=\"_blank\"") : null)>
                 @if (!String.IsNullOrEmpty(item.IconClass))

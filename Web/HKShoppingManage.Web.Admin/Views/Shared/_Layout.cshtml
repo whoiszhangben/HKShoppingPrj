@@ -16,8 +16,8 @@
         <script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="~/Scripts/jquery-migrate-1.2.1.min.js"></script>
         <script type="text/javascript" src="~/Scripts/jquery-ui-1.10.3.custom.min.js"></script>
-        <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
         <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
         <script type="text/javascript" src="~/Scripts/adminLTE/app.min.js"></script>
         <script type="text/javascript" src="~/Scripts/bootstrap/bootstrap.min.js"></script>
         <script type="text/javascript" src="~/Scripts/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
@@ -25,6 +25,9 @@
         <script type="text/javascript" src="~/Scripts/admin.navigation.js"></script>
         <script type="text/javascript" src="~/Scripts/admin.common.js"></script>
         <script type="text/javascript" src="~/Scripts/typeahead/typeahead.bundle.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/pageHelper.js"></script>
+        <script type="text/javascript" src="~/Scripts/jquery.pagination.js"></script>
+        <script type="text/javascript" src="~/Scripts/StringHelper.js"></script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -42,10 +45,10 @@
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             <li class="account-info">
-                                张坤
+                                @MvcHelper.User.UserName
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="/Login/LogOff">
                                     注销
                                 </a>
                             </li>
@@ -76,10 +79,10 @@
             </div>
             <div class="main-footer clearfix">
                 <div class="pull-left">
-                    Powered by ZhangBen</a>
+                    Powered by ZhangBen
                 </div>
                 <div class="pull-right hidden-xs">
-                    <b>HKShoppingManage version 1.0.0</b>
+                    <b>当前版本 1.0.0</b>
                 </div>
                 <div class="text-center">
                     @DateTime.Now.ToString("f")
@@ -96,11 +99,8 @@
                 }
             };
         </script>
-        <a id="backTop" class="btn btn-back-top bg-teal"></a>
         <script>
             $(document).ready(function () {
-                $('#backTop').backTop();
-
                 $('a.sidebar-toggle').on('toggle', function () {
                     var collapsed = $('body').hasClass('sidebar-collapse');
                 });

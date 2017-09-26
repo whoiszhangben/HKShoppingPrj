@@ -45,7 +45,7 @@ namespace HKShoppingManage.Web.Admin
         /// 处理未登录返回结果
         /// </summary>
         /// <param name="filterContext"></param>
-        private void SetNoLoginResult(ActionExecutingContext filterContext, string errCode, string redirectUrl = "/Login/Login")
+        private void SetNoLoginResult(ActionExecutingContext filterContext, string errCode, string redirectUrl = "/Login/Index")
         {
             //当请求上下文是Ajax请求时
             if (filterContext.RequestContext.HttpContext.Request.IsAjaxRequest())
@@ -69,10 +69,7 @@ namespace HKShoppingManage.Web.Admin
                 else
                 {
                     SessionHelper.SetSession(SessionKey.ErrorCode, errCode);
-                    if (!"10000".Equals(errCode))
-                    {
-                        filterContext.Result = new RedirectResult(redirectUrl);
-                    }
+                    filterContext.Result = new RedirectResult(redirectUrl);
                 }
             }
         }
