@@ -37,9 +37,9 @@ namespace HKShoppingManage.Web.Admin
             {
                 switch (e.Name)
                 {
-                    case "assetConfig.xml":
+                    case "productUnit.xml":
                         {
-                            AssetTypeStatusFactory.Init();
+                            UnitFactory.Init();
                         }
                         break;
                     default:

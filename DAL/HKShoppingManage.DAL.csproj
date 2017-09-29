@@ -43,13 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssetInfoDAL.cs" />
+    <Compile Include="CategoryDAL.cs" />
     <Compile Include="CustomerDAL.cs" />
-    <Compile Include="Interface\IAssetInfoDAL.cs" />
+    <Compile Include="Interface\ICategoryDAL.cs" />
     <Compile Include="Interface\ICustomerDAL.cs" />
-    <Compile Include="Interface\IOperationLogDAL.cs" />
+    <Compile Include="Interface\IProductDAL.cs" />
     <Compile Include="Interface\IUserDAL.cs" />
-    <Compile Include="OperationLogDAL.cs" />
+    <Compile Include="ProductDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDAL.cs" />
   </ItemGroup>

@@ -126,6 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentifyPermission.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Cache\CacheManager.cs" />
     <Compile Include="Common\CssRewriteUrlTransformWrapper.cs" />
     <Compile Include="Common\FileUpload\FileUpload.cs" />
     <Compile Include="Common\FileUpload\FileUpLoadKeys.cs" />
@@ -135,19 +136,19 @@
     <Compile Include="Common\PageHelperBuilder.cs" />
     <Compile Include="Common\MvcHelper.cs" />
     <Compile Include="Common\NewtonsoftJsonResult.cs" />
-    <Compile Include="Common\OperationLogHelper.cs" />
     <Compile Include="Common\OperationLogTypeCache.cs" />
-    <Compile Include="Common\AssetTypeStatusFactory.cs" />
     <Compile Include="Common\Session\SessionCode.cs" />
     <Compile Include="Common\Session\SessionKey.cs" />
     <Compile Include="Common\Session\SessionUser.cs" />
+    <Compile Include="Common\UnitFactory.cs" />
     <Compile Include="Common\VerificationHelper.cs" />
     <Compile Include="Common\WatchHelper.cs" />
+    <Compile Include="Common\zTreeNode.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\OperationLogController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
@@ -162,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\libmism32.dll" />
+    <Content Include="Config\productUnit.xml" />
     <Content Include="Content\adminLTE\AdminLTE-2.3.0.css" />
     <Content Include="Content\adminLTE\AdminLTE-2.3.0.min.css" />
     <Content Include="Content\adminLTE\AdminLTE-2.3.0.rtl.css" />
@@ -238,6 +240,10 @@
     <Content Include="Content\images\ajax_loader_small.gif" />
     <Content Include="Content\images\carbon_fibre_big.png" />
     <Content Include="Content\images\google-maps.gif" />
+    <Content Include="Content\images\icon.png" />
+    <Content Include="Content\images\loading-0.gif" />
+    <Content Include="Content\images\loading-1.gif" />
+    <Content Include="Content\images\loading-2.gif" />
     <Content Include="Content\images\logo - 副本.png" />
     <Content Include="Content\images\logo-mini.png" />
     <Content Include="Content\images\logo.png" />
@@ -430,6 +436,7 @@
     <Content Include="Content\kendo\2014.1.318\Uniform\slider-v.gif" />
     <Content Include="Content\kendo\2014.1.318\Uniform\sprite.png" />
     <Content Include="Content\kendo\2014.1.318\Uniform\sprite_2x.png" />
+    <Content Include="Content\layer.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\Roxy_Fileman\css\images\animated-overlay.gif" />
     <Content Include="Content\Roxy_Fileman\css\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -808,6 +815,21 @@
     <Content Include="Content\tinymce\themes\modern\theme.min.js" />
     <Content Include="Content\tinymce\tinymce.min.js" />
     <Content Include="Content\typeahead\typeahead.css" />
+    <Content Include="Content\zTreeStyle\img\diy\1_close.png" />
+    <Content Include="Content\zTreeStyle\img\diy\1_open.png" />
+    <Content Include="Content\zTreeStyle\img\diy\2.png" />
+    <Content Include="Content\zTreeStyle\img\diy\3.png" />
+    <Content Include="Content\zTreeStyle\img\diy\4.png" />
+    <Content Include="Content\zTreeStyle\img\diy\5.png" />
+    <Content Include="Content\zTreeStyle\img\diy\6.png" />
+    <Content Include="Content\zTreeStyle\img\diy\7.png" />
+    <Content Include="Content\zTreeStyle\img\diy\8.png" />
+    <Content Include="Content\zTreeStyle\img\diy\9.png" />
+    <Content Include="Content\zTreeStyle\img\line_conn.gif" />
+    <Content Include="Content\zTreeStyle\img\loading.gif" />
+    <Content Include="Content\zTreeStyle\img\zTreeStandard.gif" />
+    <Content Include="Content\zTreeStyle\img\zTreeStandard.png" />
+    <Content Include="Content\zTreeStyle\zTreeStyle.css" />
     <Content Include="error.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -849,6 +871,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery.ztree.core.min.js" />
+    <Content Include="Scripts\jquery.ztree.excheck.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.af-ZA.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.af.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\cultures\kendo.culture.am-ET.min.js" />
@@ -1270,13 +1294,14 @@
     <Content Include="Scripts\kendo\2014.1.318\kendo.view.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.web.min.js" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.window.min.js" />
+    <Content Include="Scripts\layer.js" />
     <Content Include="Scripts\pageHelper.js" />
     <Content Include="Scripts\StringHelper.js" />
     <Content Include="Scripts\tagEditor\jquery.caret.min.js" />
     <Content Include="Scripts\tagEditor\jquery.tag-editor.js" />
     <Content Include="Scripts\tagEditor\jquery.tag-editor.min.js" />
     <Content Include="Scripts\typeahead\typeahead.bundle.min.js" />
-    <Content Include="Sql脚本及部署说明\User.sql" />
+    <Content Include="Sql脚本及部署说明\All.sql" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1340,7 +1365,6 @@
     <Content Include="Content\tinymce\skins\lightgray\fonts\tinymce.woff" />
     <Content Include="Config\sitemap.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\OperationLog\Index.cshtml" />
     <Content Include="Scripts\fineuploader\LICENSE" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\kendo\2014.1.318\jquery.min.map" />
@@ -1409,8 +1433,6 @@
     <Content Include="Scripts\kendo\2014.1.318\kendo.view.min.js.map" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.web.min.js.map" />
     <Content Include="Scripts\kendo\2014.1.318\kendo.window.min.js.map" />
-    <Content Include="Views\Shared\Confirm.cshtml" />
-    <Content Include="Views\Shared\Delete.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Address.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateNullable.cshtml" />
@@ -1427,10 +1449,7 @@
     <Content Include="Views\Shared\EditorTemplates\RichEditor.cshtml" />
     <Content Include="Views\Shared\Menu.cshtml" />
     <Content Include="Views\Shared\Notifications.cshtml" />
-    <Content Include="Views\Shared\_AddressAttributes.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Shared\_AdminPopupLayout.cshtml" />
-    <Content Include="Views\Shared\_GridPagerMessages.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Customer\Index.cshtml" />
     <Content Include="Views\Customer\Create.cshtml" />
@@ -1441,6 +1460,11 @@
     <Content Include="Views\Statistics\Index.cshtml" />
     <Content Include="Views\Purchase\Index.cshtml" />
     <Content Include="Views\Sale\Index.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\_CreateOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BLL\HKShoppingManage.BLL.csproj">

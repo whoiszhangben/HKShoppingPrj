@@ -22,6 +22,8 @@ namespace HKShoppingManage.Web.Admin
             GlobalFilters.Filters.Add(new IdentifyPermission());
             GlobalFilters.Filters.Add(new ExceptionAttribute());
             MvcHelper.InitAutofacConfig();
+            CacheManager.Init();
+            UnitFactory.Init();
             WatchHelper.Init();
 
             //全局Json设置
