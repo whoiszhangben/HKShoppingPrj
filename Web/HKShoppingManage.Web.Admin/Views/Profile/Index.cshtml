@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "华信工作";
+    Html.SetActiveMenuItemSystemName("Profile");
+}
+
+@Styles.Render("~/Content/bootstrap-table.min.css")
+@Scripts.Render("~/Scripts/bootstrap-table.min.js")
+@Scripts.Render("~/Scripts/bootstrap-table-zh-CN.js")
+<div class="content">
+    <div style="float:right;margin:10px 0px 10px 5px">
+        <button type="button" class="btn btn-default" id="btnAdd" title="新增">
+            <span style="color:#008000;background-color:#efefef;font-weight:bold;"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+    </div>
+    <table class="table table-bordered table-condensed" id="testTB"></table>
+</div>
+<script type="text/javascript">
+    function initTable() {
+        $("#testTB").bootstrapTable("destroy");
+        $("#testTB").bootstrapTable({
+            method: "POST",
+            url: "/Vendor/GetList",
+            editable: true,//开启编辑模式
+            clickToSelect: true,
+            cache: false,
+            showToggle: true, //显示切换按钮来切换表/卡片视图。
+            showPaginationSwitch: true, //显示分页切换按钮
+            pagination: true,
+            pageList: [10, 25, 50, 100],
+            pageSize: 10,
+            pageNumber: 1,
+            sidePagination:'server',
+            uniqueId: 'Id', //将index列设为唯一索引
+            striped: true,
+            search: false,
+            showRefresh: true,
+            minimumCountColumns: 2,
+            smartDisplay: true,
+            columns: [
+                { field: "Id", title: "序号", align: "center", sortable: "true" },
+                { field: "VendorName", title: "供应商名称", align: "center", sortable: "true" },
+                { field: "HelpCode", title: "助记码", align: "center", sortable: "true" },
+                { field: "VendorAddress", title: "地址", align: "center", sortable: "true" },
+                { field: "VendorTel", title: "电话", align: "center", sortable: "true" },
+                { field: "VendorFax", title: "传真", align: "center", sortable: "true" },
+                { field: "VendorEmail", title: "EMail", align: "center", sortable: "true" },
+                { field: "VendorWx", title: "微信", align: "center", sortable: "true" },
+                {
+                    field: "action", title: "操作", align: "center", formatter: function (value, row, index) {
+                        var strHtml = '<a href="./index.php?r=subprocess/modify&id=' + row.Id + '"><li class="glyphicon glyphicon-pencil"></li></a>' +
+                            '<a href="javascript:void(0);" onclick="removeData(' + index + ')" style="margin-left:5px;"><li class="glyphicon glyphicon-remove"></li></a>';
+                        return strHtml;
+                    }, edit: false
+                }
+            ]
+        })
+    }
+    $(function () {
+        initTable();
+        $("#btnAdd").unbind("click").bind("click", function () {
+            location.href = "/Profile/Create";
+        });
+    });
+
+</script>

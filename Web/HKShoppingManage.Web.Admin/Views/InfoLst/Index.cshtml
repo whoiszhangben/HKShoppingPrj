@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "资料列表";
+    Html.SetActiveMenuItemSystemName("InfoLst");
+}
+
+<div class="content">
+    <div id="infolist">
+        @foreach (var item in ViewBag.CertificationLst)
+        {
+        <div style='width:150px;display:inline-block;margin:10px 0;' class='exchangeWrapper'>
+            <span class='exchangeCls'>@item.Value</span>
+        </div>
+         }
+   </div>
+</div>

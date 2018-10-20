@@ -1,0 +1,21 @@
+﻿@using HKShoppingManage.Model
+@model POOrder
+@{
+    //page title
+    ViewBag.Title = "采购订单";
+    Html.SetActiveMenuItemSystemName("Purchase");
+}
+
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        新建采购订单
+        <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink("返回采购订单列表", "Index")</small>
+    </h1>
+    <div class="pull-right">
+        <button type="button" name="save" class="btn bg-blue" id="btnSubmit">
+            <i class="fa fa-floppy-o"></i>
+            <span>保存</span>
+        </button>
+    </div>
+</div>
+@Html.Partial("_CreateOrUpdate", Model)

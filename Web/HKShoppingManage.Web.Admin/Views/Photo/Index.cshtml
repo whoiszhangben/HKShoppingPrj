@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "我的相册";
+    Html.SetActiveMenuItemSystemName("Photo");
+}
+<div class="content-header clearfix">
+    <div class="pull-left">
+
+    </div>
+    <div class="pull-right">
+        <a href="@Url.Action("Create")" class="btn bg-blue">
+            <i class="fa fa-plus-square"></i>
+            <span>新增相册</span>
+        </a>
+    </div>
+</div>
+
+<style type="text/css">
+    p {
+        padding:0;
+        margin:0;
+    }
+    .albuminfo {
+        width: 150px;
+        height: 150px;
+        border-radius: 5px;
+        border: 1px solid currentColor;
+        margin: 10px;
+        padding: 10px;
+    }
+</style>
+<div class="content clearfix">
+</div>
+<script type="text/javascript">
+    var winWidth = $(".content").width();
+    var eachlineCount = winWidth / 170, extraSpace = winWidth % 170;
+    var paddingAjust = 15 + Math.floor(extraSpace / 2);
+    $(".content").css({ "padding-left": paddingAjust, "padding-right": paddingAjust });
+
+    $(function () {
+
+        $.ajax({
+            type: "POST",
+            url: "/Photo/GetList",
+            success: function (data) {
+                if (data.IsSuccess) {
+                    var list = data.Data;
+                    var strHtml = "";
+                    for (var i = 0; i < list.length; i++) {
+                        var album = list[i];
+                        strHtml += '<div style="float:left;"><div data-id="' + album.Id + '" class="albuminfo" style="background:url(' + album.CoverImg +') no-repeat;background-size:100% 100%;" ></div><div style="padding: 10px; "><p style="font - weight: 900; ">' + album.AlbumName + '</p><p>' + album.PhotoNum + '张</p></div></div>';
+                    }
+                    $(".content").html(strHtml);
+
+                    $(".content").on("click", ".albuminfo", function () {
+                        var $thisId = $(this).attr("data-id");
+                        layer.alert("点击了该相册" + $thisId);
+                    });
+
+                    $(".albuminfo").hover(function () {
+                        $(this).css({ "cursor": "pointer", "opacity": "0.5" });
+                    }, function () {
+                        $(this).css({ "cursor": "pointer", "opacity": "1" });
+                    });
+                }
+            },
+            fail: function (err) {
+                layer.alert("新增异常:" + err);
+            }
+        })
+
+
+    });
+</script>

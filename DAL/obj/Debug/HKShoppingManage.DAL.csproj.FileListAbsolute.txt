@@ -1,3 +1,5 @@
+E:\港代项目\HKShoppingManage\DAL\obj\Debug\HKShoppingManage.DAL.csprojAssemblyReference.cache
+E:\港代项目\HKShoppingManage\DAL\obj\Debug\HKShoppingManage.DAL.csproj.CoreCompileInputs.cache
 E:\港代项目\HKShoppingManage\DAL\bin\Debug\HKShoppingManage.DAL.dll
 E:\港代项目\HKShoppingManage\DAL\bin\Debug\HKShoppingManage.DAL.pdb
 E:\港代项目\HKShoppingManage\DAL\bin\Debug\Dapper.dll
@@ -9,6 +11,6 @@ E:\港代项目\HKShoppingManage\DAL\bin\Debug\log4net.dll
 E:\港代项目\HKShoppingManage\DAL\bin\Debug\HKShoppingManage.Common.pdb
 E:\港代项目\HKShoppingManage\DAL\bin\Debug\HKShoppingManage.DBUtility.pdb
 E:\港代项目\HKShoppingManage\DAL\bin\Debug\HKShoppingManage.Model.pdb
-E:\港代项目\HKShoppingManage\DAL\obj\Debug\HKShoppingManage.DAL.csprojResolveAssemblyReference.cache
+E:\港代项目\HKShoppingManage\DAL\obj\Debug\HKShoppingManage.DAL.csproj.CopyComplete
 E:\港代项目\HKShoppingManage\DAL\obj\Debug\HKShoppingManage.DAL.dll
 E:\港代项目\HKShoppingManage\DAL\obj\Debug\HKShoppingManage.DAL.pdb

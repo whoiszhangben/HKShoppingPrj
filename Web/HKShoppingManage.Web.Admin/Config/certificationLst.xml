@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<CertificationXML>
+  <CertificationLst>
+    <CertificationModel>
+      <Key>0</Key>
+      <Value>身份证复印件</Value>
+      <IsRemark>false</IsRemark>
+    </CertificationModel>
+    <CertificationModel>
+      <Key>1</Key>
+      <Value>学历证书</Value>
+      <IsRemark>false</IsRemark>
+    </CertificationModel>
+    <CertificationModel>
+      <Key>2</Key>
+      <Value>入职登记表</Value>
+      <IsRemark>false</IsRemark>
+    </CertificationModel>
+    <CertificationModel>
+      <Key>3</Key>
+      <Value>劳动合同</Value>
+      <IsRemark>true</IsRemark>
+    </CertificationModel>
+    <CertificationModel>
+      <Key>4</Key>
+      <Value>社保卡</Value>
+      <IsRemark>false</IsRemark>
+    </CertificationModel>
+    <CertificationModel>
+      <Key>5</Key>
+      <Value>离职证明</Value>
+      <IsRemark>false</IsRemark>
+    </CertificationModel>
+  </CertificationLst>
+</CertificationXML>

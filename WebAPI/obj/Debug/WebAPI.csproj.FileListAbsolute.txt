@@ -1,0 +1,23 @@
+c:\users\administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\WebAPI.dll
+c:\users\administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\WebAPI.pdb
+c:\users\administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\Common.dll
+c:\users\administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\System.Web.Http.dll
+c:\users\administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\Common.pdb
+c:\users\administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\System.Web.Http.xml
+c:\users\administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\zh-Hans\System.Web.Http.resources.dll
+c:\users\administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\obj\Debug\WebAPI.csprojResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\obj\Debug\WebAPI.dll
+c:\users\administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\obj\Debug\WebAPI.pdb
+C:\Users\Administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Administrator\documents\visual studio 2013\Projects\WebAPIDemo\WebAPI\bin\Debug\zh-Hans\System.Net.Http.Formatting.resources.dll
+E:\港代项目\HKShoppingManage\WebAPI\bin\Debug\WebAPI.dll
+E:\港代项目\HKShoppingManage\WebAPI\bin\Debug\WebAPI.pdb
+E:\港代项目\HKShoppingManage\WebAPI\bin\Debug\System.Web.Http.dll
+E:\港代项目\HKShoppingManage\WebAPI\bin\Debug\Newtonsoft.Json.dll
+E:\港代项目\HKShoppingManage\WebAPI\bin\Debug\System.Web.Http.xml
+E:\港代项目\HKShoppingManage\WebAPI\obj\Debug\WebAPI.csprojResolveAssemblyReference.cache
+E:\港代项目\HKShoppingManage\WebAPI\obj\Debug\WebAPI.csproj.CoreCompileInputs.cache
+E:\港代项目\HKShoppingManage\WebAPI\obj\Debug\WebAPI.dll
+E:\港代项目\HKShoppingManage\WebAPI\obj\Debug\WebAPI.pdb

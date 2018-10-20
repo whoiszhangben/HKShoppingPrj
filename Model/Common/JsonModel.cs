@@ -50,4 +50,15 @@ namespace HKShoppingManage.Model
         }
 
     }
+
+    public class JsonModelBootstrapTable
+    {
+        public JsonModelBootstrapTable(int _total, object _rows)
+        {
+            this.total = _total;
+            this.rows = _rows;
+        }
+        public int total { get; set; }
+        public object rows { get; set; }
+    }
 }

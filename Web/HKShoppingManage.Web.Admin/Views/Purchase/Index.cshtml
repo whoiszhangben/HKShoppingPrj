@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "采购订单";
+    Html.SetActiveMenuItemSystemName("Purchase");
+}
+@Styles.Render("~/Content/bootstrap-table.min.css")
+@Scripts.Render("~/Scripts/bootstrap-table.min.js")
+@Scripts.Render("~/Scripts/bootstrap-table-zh-CN.js")
+<div class="content">
+    <div style="float:right;margin:10px 0px 10px 5px">
+        <button type="button" class="btn btn-default" id="btnAdd" title="新增">
+            <span style="color:#008000;background-color:#efefef;font-weight:bold;"></span>
+            <span class="glyphicon glyphicon-plus"></span>
+        </button>
+    </div>  
+    <table class="table table-bordered table-condensed" id="testTB">
+
+    </table>
+</div>
+<script type="text/javascript">
+    function initTable() {
+        $("#testTB").bootstrapTable("destroy");
+        $("#testTB").bootstrapTable({
+            method: "POST",
+            url: "/Purchase/GetList",
+            editable: true,//开启编辑模式  
+            clickToSelect: true,
+            cache: false,
+            showToggle: true, //显示切换按钮来切换表/卡片视图。  
+            showPaginationSwitch: true, //显示分页切换按钮  
+            pagination: true,
+            pageList: [10, 25, 50, 100],
+            pageSize: 10,
+            pageNumber: 1,
+            sidePagination:'server',
+            uniqueId: 'Id', //将index列设为唯一索引  
+            striped: true,
+            search: true,
+            showRefresh: true,
+            minimumCountColumns: 2,
+            smartDisplay: true,
+            columns: [
+                {
+                    field: "Id", title: "序号", align: "center", formatter: function (value, row, index) {
+                        return index + 1;
+                    } },
+                { field: "POOrderNo", title: "订单号", align: "center", sortable: "true" },
+                { field: "ExchangeRate", title: "汇率", align: "center", sortable: "true" },
+                { field: "TotalAmount", title: "总金额", align: "center", sortable: "true" },
+                {
+                    field: "OrderState", title: "状态", align: "center", sortable: "true", formatter: function (value, row, index) {
+                        return value ? "未完成" : "已完成";
+                    }
+                },
+                { field: "CreateTime", title: "创建时间", align: "center", sortable: "true" },
+                {
+                    field: "action", title: "操作", align: "center", formatter: function (value, row, index) {
+                        var strHtml = '<a href="javascript:void(0);" title="确认" onclick="confirmOrder(\'' + row.Id + '\')" style="margin:0 5px; "><li class="glyphicon glyphicon-ok-sign"></li></a>'+
+                            '<a href="/Purchase/Create?Id=' + row.Id + '" title="编辑" style="margin:0 5px; "><li class="glyphicon glyphicon-pencil"></li></a>' +
+                            '<a href="javascript:void(0);" title="删除" onclick="removeData(\'' + row.POOrderNo + '\',\'' + row.Id+'\')" style="margin:0 5px; "><li class="glyphicon glyphicon-remove"></li></a>';
+                        return strHtml;
+                    }, edit: false
+                }
+            ]
+        })
+    }
+    ///删除该订单
+    function removeData(orderno,orderid) {
+        dialogHelper.Confirm({
+            content: "您确定删除" + orderno +"订单吗?",
+            success: function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Purchase/Delete",
+                    data: {
+                        Id: orderid
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            location.href = "/Purchase/Index";
+                        }
+                    }
+                });
+            }
+        });
+    }
+    ///确认订单采购完成，并根据分录来更新库存
+    function confirmOrder(orderid) {
+        dialogHelper.Confirm({
+            content: "确认订单是否采购完成并更新入库",
+            success: function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Purchase/Confirm",
+                    data: {
+                        Id: orderid
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.IsSuccess && data.Data) {
+                            layer.alert("确认成功");
+                        }
+                    }
+                });
+            }
+        });
+    }
+    $(function () {
+        initTable();
+        $("#btnAdd").unbind("click").bind("click", function () {
+            location.href = "/Purchase/Create";
+        });
+    });
+    
+</script>

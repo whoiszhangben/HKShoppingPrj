@@ -21,6 +21,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -61,12 +62,21 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -111,6 +121,9 @@
       <Private>True</Private>
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebApiContrib.Formatting.Jsonp, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WebApiContrib.Formatting.Jsonp.3.0.2\lib\net45\WebApiContrib.Formatting.Jsonp.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -126,11 +139,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentifyPermission.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Cache\CacheManager.cs" />
+    <Compile Include="Common\CertificationFactory.cs" />
     <Compile Include="Common\CssRewriteUrlTransformWrapper.cs" />
     <Compile Include="Common\FileUpload\FileUpload.cs" />
     <Compile Include="Common\FileUpload\FileUpLoadKeys.cs" />
     <Compile Include="Common\FileUpload\PostFile.cs" />
+    <Compile Include="Common\FineUpload\FineUpload.cs" />
+    <Compile Include="Common\FineUpload\FineUploadResult.cs" />
     <Compile Include="Common\HtmlHelperExtend.cs" />
     <Compile Include="Common\LocalizedString.cs" />
     <Compile Include="Common\PageHelperBuilder.cs" />
@@ -148,11 +165,17 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InfoLstController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PhotoController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\PurchaseController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\StatisticsController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\VendorController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\libmism32.dll" />
+    <Content Include="Config\certificationLst.xml" />
     <Content Include="Config\productUnit.xml" />
     <Content Include="Content\adminLTE\AdminLTE-2.3.0.css" />
     <Content Include="Content\adminLTE\AdminLTE-2.3.0.min.css" />
@@ -221,6 +245,7 @@
     <Content Include="Content\adminLTE\skins\skin-yellow.min.css" />
     <Content Include="Content\adminLTE\skins\_all-skins.css" />
     <Content Include="Content\adminLTE\skins\_all-skins.min.css" />
+    <Content Include="Content\bootstrap-table.min.css" />
     <Content Include="Content\bootstrap-touchspin\jquery.bootstrap-touchspin.css" />
     <Content Include="Content\bootstrap-touchspin\jquery.bootstrap-touchspin.min.css" />
     <Content Include="Content\bootstrap\css\bootstrap-theme.css" />
@@ -246,6 +271,7 @@
     <Content Include="Content\images\loading-2.gif" />
     <Content Include="Content\images\logo - 副本.png" />
     <Content Include="Content\images\logo-mini.png" />
+    <Content Include="Content\images\logo.jpg" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\search-icon.png" />
     <Content Include="Content\images\throbber-synchronizing.gif" />
@@ -838,27 +864,56 @@
     <Content Include="Scripts\admin.search.js" />
     <Content Include="Scripts\adminLTE\app.js" />
     <Content Include="Scripts\adminLTE\app.min.js" />
+    <Content Include="Scripts\bootstrap-select.js" />
+    <Content Include="Scripts\bootstrap-table-edit.js" />
+    <Content Include="Scripts\bootstrap-table-edit.min.js" />
+    <Content Include="Scripts\bootstrap-table-zh-CN.js" />
+    <Content Include="Scripts\bootstrap-table-zh-CN.min.js" />
+    <Content Include="Scripts\bootstrap-table.js" />
+    <Content Include="Scripts\bootstrap-table.min.js" />
     <Content Include="Scripts\bootstrap-touchspin\jquery.bootstrap-touchspin.js" />
     <Content Include="Scripts\bootstrap-touchspin\jquery.bootstrap-touchspin.min.js" />
+    <Content Include="Scripts\bootstrap.autocomplete.js" />
     <Content Include="Scripts\bootstrap\bootstrap.js" />
     <Content Include="Scripts\bootstrap\bootstrap.min.js" />
     <Content Include="Scripts\bootstrap\npm.js" />
     <Content Include="Scripts\chartjs\Chart.js" />
     <Content Include="Scripts\chartjs\Chart.min.js" />
     <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\dialogHelper.js" />
     <Content Include="Scripts\farbtastic.js" />
+    <Content Include="Scripts\fineuploader\continue.gif" />
+    <Content Include="Scripts\fineuploader\dnd.js" />
+    <Content Include="Scripts\fineuploader\dnd.min.js" />
     <Content Include="Scripts\fineuploader\edit.gif" />
+    <Content Include="Scripts\fineuploader\fine-uploader-gallery.css" />
+    <Content Include="Scripts\fineuploader\fine-uploader-gallery.min.css" />
+    <Content Include="Scripts\fineuploader\fine-uploader-new.css" />
+    <Content Include="Scripts\fineuploader\fine-uploader-new.min.css" />
+    <Content Include="Scripts\fineuploader\fine-uploader.core.js" />
+    <Content Include="Scripts\fineuploader\fine-uploader.core.min.js" />
+    <Content Include="Scripts\fineuploader\fine-uploader.css" />
+    <Content Include="Scripts\fineuploader\fine-uploader.js" />
+    <Content Include="Scripts\fineuploader\fine-uploader.min.css" />
+    <Content Include="Scripts\fineuploader\fine-uploader.min.js" />
     <Content Include="Scripts\fineuploader\fineuploader-4.2.2.css" />
     <Content Include="Scripts\fineuploader\fineuploader-4.2.2.min.css" />
     <Content Include="Scripts\fineuploader\iframe.xss.response-4.2.2.js" />
+    <Content Include="Scripts\fineuploader\jquery.fine-uploader.js" />
+    <Content Include="Scripts\fineuploader\jquery.fine-uploader.min.js" />
     <Content Include="Scripts\fineuploader\jquery.fineuploader-4.2.2.js" />
     <Content Include="Scripts\fineuploader\jquery.fineuploader-4.2.2.min.js" />
     <Content Include="Scripts\fineuploader\loading.gif" />
+    <Content Include="Scripts\fineuploader\pause.gif" />
     <Content Include="Scripts\fineuploader\placeholders\not_available-generic.png" />
     <Content Include="Scripts\fineuploader\placeholders\waiting-generic.png" />
     <Content Include="Scripts\fineuploader\processing.gif" />
+    <Content Include="Scripts\fineuploader\retry.gif" />
     <Content Include="Scripts\fineuploader\templates\default.html" />
+    <Content Include="Scripts\fineuploader\templates\gallery.html" />
     <Content Include="Scripts\fineuploader\templates\simple-thumbnails.html" />
+    <Content Include="Scripts\fineuploader\trash.gif" />
+    <Content Include="Scripts\import.inc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery-migrate-1.2.1.js" />
@@ -1302,7 +1357,9 @@
     <Content Include="Scripts\tagEditor\jquery.tag-editor.min.js" />
     <Content Include="Scripts\typeahead\typeahead.bundle.min.js" />
     <Content Include="Sql脚本及部署说明\All.sql" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1465,6 +1522,30 @@
     <Content Include="Views\Category\_CreateOrUpdate.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
     <Content Include="Views\Product\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Purchase\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Purchase\Create.cshtml" />
+    <Content Include="Views\Vendor\Index.cshtml" />
+    <Content Include="Views\Vendor\Create.cshtml" />
+    <Content Include="Views\Vendor\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Photo\Index.cshtml" />
+    <Content Include="Views\Video\Index.cshtml" />
+    <Content Include="Views\Photo\Create.cshtml" />
+    <Content Include="Views\Photo\_CreateOrUpdate.cshtml" />
+    <Content Include="Scripts\fineuploader\dnd.js.map" />
+    <Content Include="Scripts\fineuploader\dnd.min.js.map" />
+    <Content Include="Scripts\fineuploader\fine-uploader-gallery.min.css.map" />
+    <Content Include="Scripts\fineuploader\fine-uploader-new.min.css.map" />
+    <Content Include="Scripts\fineuploader\fine-uploader.core.js.map" />
+    <Content Include="Scripts\fineuploader\fine-uploader.core.min.js.map" />
+    <Content Include="Scripts\fineuploader\fine-uploader.js.map" />
+    <Content Include="Scripts\fineuploader\fine-uploader.min.css.map" />
+    <Content Include="Scripts\fineuploader\fine-uploader.min.js.map" />
+    <Content Include="Scripts\fineuploader\jquery.fine-uploader.js.map" />
+    <Content Include="Scripts\fineuploader\jquery.fine-uploader.min.js.map" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Create.cshtml" />
+    <Content Include="Views\Profile\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\InfoLst\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\BLL\HKShoppingManage.BLL.csproj">
@@ -1482,6 +1563,10 @@
     <ProjectReference Include="..\..\Model\HKShoppingManage.Model.csproj">
       <Project>{cb107f2f-ec64-485d-80ca-6243ddde02d6}</Project>
       <Name>HKShoppingManage.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\WebAPI\HKShoppingManage.WebAPI.csproj">
+      <Project>{e7e4ca23-c703-4dec-b7c2-8d7175065536}</Project>
+      <Name>HKShoppingManage.WebAPI</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

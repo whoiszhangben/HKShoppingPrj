@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "产品类别";
+    Html.SetActiveMenuItemSystemName("Category");
+}
+<link rel="stylesheet" href="~/Content/zTreeStyle/zTreeStyle.css" />
+<script type="text/javascript" src="~/Scripts/jquery.ztree.core.min.js"></script>
+<div class="content-header clearfix">
+    <div class="pull-left">
+
+    </div>
+    <div class="pull-right">
+        <a href="@Url.Action("Create")" class="btn bg-blue">
+            <i class="fa fa-plus-square"></i>
+            <span>新增</span>
+        </a>
+    </div>
+
+</div>
+
+<div class="content">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @foreach (var item in CacheManager.CategoryLstCache.Keys)
+            {
+                <ul id="@item" class="ztree"></ul>
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var setting = {
+        data: {
+            key: {
+                name: "name"
+            },
+            simpleData: {
+                enable: false,
+                idKey: "id",
+                pIdKey: "pId",
+                rootPId: null
+            }
+        },
+        view: {
+            showIcon: false,
+            txtSelectedEnable: false
+        }
+    };
+    $(function () {
+        $.ajax({
+            type: "Get",
+            url: "/Category/GetTrees",
+            dataType: "Json",
+            success: function (data) {
+                if (!!data.Data) {
+                    var dataLst = data.Data;
+                    $.each(dataLst, function (index, item) {
+                        $.fn.zTree.init($("#" + index), setting, item);
+                    });
+                }
+            }
+        });
+    })
+</script>

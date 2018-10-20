@@ -1,0 +1,171 @@
+﻿@using HKShoppingManage.Model
+@model POOrder
+
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+<link rel="stylesheet" href="~/Content/bootstrap-table.min.css" />
+<script type="text/javascript" src="~/Scripts/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap-table-edit.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap-select.js"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap.autocomplete.js"></script>
+<div class="content clearfix">
+    <div class="form-horizontal">
+        <div id="customer-edit" class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                @Html.RenderBootstrapTabHeader("tab-order", new LocalizedString("订单信息"), true)
+            </ul>
+            <div class="tab-content">
+                @Html.RenderBootstrapTabContent("tab-order", @TabOrder(), true)
+            </div>
+        </div>
+    </div>
+</div>
+
+@*save selected tab name*@
+<input type="hidden" id="selected-tab-name" name="selected-tab-name" value="@(Html.GetSelectedTabName())">
+
+@helper TabOrder()
+{
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="purchaseOrderNo"><span>@Html.LabelFor(model => model.POOrderNo):@Html.DisplayFor(model => model.POOrderNo)</span><span>@Html.LabelFor(model => model.ExchangeRate):@Html.EditorFor(model => model.ExchangeRate)</span></div>
+            <div style="float:right;margin:10px 0px 10px 5px">
+                <button type="button" class="btn btn-default" id="btnAddRow" title="新增行">
+                    <span style="color:#008000;background-color:#efefef;font-weight:bold;"></span>
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+            <table class="table table-bordered table-condensed" id="orderEntry"></table>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function deleterow(EntryId) {
+            //var allTableData = $("#orderEntry").bootstrapTable("getData");
+            //var deleteData = selectArrayItemByAttr(allTableData, "EntryId", EntryId);
+            var deleteData = [];
+            deleteData.push(parseInt(EntryId));
+            $("#orderEntry").bootstrapTable("remove", {
+                field: "EntryId",
+                values: deleteData
+            })
+        }
+        function queryHistoryPrice(productId) {
+            var tml=""
+            dialogHelper.ShowInfo({
+                width: "500px",
+                height: "300px",
+                content: "展示历史价格的信息",
+                title: { 0: "历史价格", 1: "padding:0 20px 0 20px;text-align:center" },
+                success: function (index) {
+                    layer.close(index);
+                }
+            });
+        }
+        $(function () {
+            function initTable() {
+                $("#orderEntry").bootstrapTable("destroy");
+                $('#orderEntry').bootstrapTable({
+                    method: 'get',
+                    editable: true,//开启编辑模式
+                    formatNoMatches: function () {
+                        return "请点击右上角+按钮开始下单";
+                    },
+                    columns: [
+                        {
+                            field: "EntryId", edit: false, title: "序号", align: "center", formatter: function (value, row, index) {
+                                return index + 1;
+                            }
+                        },
+                        {
+                            field: "VendorId", edit: {
+                                type: 'select',//下拉框
+                                url: '/Vendor/GetVendors',
+                                valueField: 'Id',
+                                textField: 'VendorName',
+                                onSelect: function (val, rec) {
+                                    console.log(val, rec);
+                                }
+                            }, title: "供应商", align: "center", width: "150px"
+                        },
+                        {
+                            field: "ProductId", edit: {
+                                type: 'select',//下拉框
+                                url: '/Product/GetProducts',
+                                valueField: 'Id',
+                                textField: 'Name',
+                                onSelect: function (val, rec) {
+                                    console.log(val, rec);
+                                }
+                            }, title: "产品", align: "center", width: "150px"
+                        },
+                        { field: "Price", title: "买价$", align: "center", class: "priceCls" },
+                        { field: "Qty", title: "数量", align: "center", class: "qtyCls" },
+                        { field: "ExRate", title: "汇率", align: "center", class: "exRateCls" },
+                        { field: "Amount", title: "金额$", align: "center", class: "amountCls" },
+                        { field: "AmountRMB", title: "金额￥", align: "center", class: "amountRMBCls" },
+                        {
+                            field: "action", title: "操作", align: "center", formatter: function (value, row, index) {
+                                var strHtml = '<a href="javascript:void(0);" title="删除" onclick="deleterow(\'' + row.EntryId + '\')" style="margin-left:5px; "><li class="glyphicon glyphicon-remove"></li></a>';
+                                return strHtml;
+                            }, edit: false
+                        }
+                    ]
+                });
+            }
+            initTable();
+            var arr = [];
+            @foreach (var item in Model.OrderDetails)
+            {
+                <text>
+            var Id =@(item.Id),EntryId =@(item.EntryId),ProductId =@(item.ProductId),ProductName = '@(item.ProductName)', VendorId =@(item.VendorId),VendorName ='@(item.VendorName)',Price =@(item.Price),Qty =@(item.Qty),ExRate =@(item.ExRate),Amount =@(item.Amount),AmountRMB =@(item.AmountRMB),State =@(item.State);
+            var jsItem = {
+                Id: Id,
+                EntryId: EntryId,
+                ProductId: ProductId,
+                ProductName: ProductName,
+                VendorId: VendorId,
+                VendorName: VendorName,
+                Price: Price,
+                Qty: Qty,
+                ExRate: ExRate,
+                Amount: Amount,
+                AmountRMB: AmountRMB,
+                State: State
+            }
+            arr.push(jsItem);
+                </text>
+            }
+            console.log(arr);
+            $('#orderEntry').bootstrapTable("load", arr);
+            $("#btnAddRow").unbind("click").bind("click", function () {
+        var allTableData = $("#orderEntry").bootstrapTable("getData");
+        var defaultExrate = $("#ExchangeRate").val();
+        var data = {
+                    EntryId: allTableData.length + 1,
+                    ExRate: defaultExrate
+                };
+                $('#orderEntry').bootstrapTable('append', data);
+});
+            $("#btnSubmit").unbind("click").bind("click", function () {
+                var allTableData = $("#orderEntry").bootstrapTable("getData");
+                var defaultExrate = $("#ExchangeRate").val();
+                var poorder = {
+                    Id:@Model.Id,
+                    POOrderNo: '@Model.POOrderNo',
+                    ExchangeRate: defaultExrate,
+                    OrderDetails: allTableData
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/Purchase/Create",
+                    data: poorder,
+                    dataType: "json",
+                    success: function (data) {
+                        location.href = "/Purchase/Index";
+                    }
+                });
+            })
+        });
+    </script>
+}

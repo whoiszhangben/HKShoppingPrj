@@ -39,15 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlbumBLL.cs" />
     <Compile Include="CategoryBLL.cs" />
     <Compile Include="CustomerBLL.cs" />
+    <Compile Include="Interface\IAlbumBLL.cs" />
     <Compile Include="Interface\ICategoryBLL.cs" />
     <Compile Include="Interface\ICustomerBLL.cs" />
+    <Compile Include="Interface\IPOOrderBLL.cs" />
     <Compile Include="Interface\IProductBLL.cs" />
+    <Compile Include="Interface\IProfileBLL.cs" />
     <Compile Include="Interface\IUserBLL.cs" />
+    <Compile Include="Interface\IVendorBLL.cs" />
+    <Compile Include="POOrderBLL.cs" />
     <Compile Include="ProductBLL.cs" />
+    <Compile Include="ProfileBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserBLL.cs" />
+    <Compile Include="VendorBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\HKShoppingManage.Common.csproj">

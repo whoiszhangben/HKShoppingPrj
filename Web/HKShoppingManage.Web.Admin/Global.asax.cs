@@ -9,6 +9,8 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using System.Reflection;
 using Newtonsoft.Json;
+using System.Web.Http;
+using WebApiContrib.Formatting.Jsonp;
 
 namespace HKShoppingManage.Web.Admin
 {
@@ -16,6 +18,9 @@ namespace HKShoppingManage.Web.Admin
     {
         protected void Application_Start()
         {
+            var config = GlobalConfiguration.Configuration;
+            GlobalConfiguration.Configuration.AddJsonpFormatter(config.Formatters.JsonForma‌​tter, "callback");
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
@@ -24,6 +29,7 @@ namespace HKShoppingManage.Web.Admin
             MvcHelper.InitAutofacConfig();
             CacheManager.Init();
             UnitFactory.Init();
+            CertificationFactory.Init();
             WatchHelper.Init();
 
             //全局Json设置

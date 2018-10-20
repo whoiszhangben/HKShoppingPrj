@@ -1,0 +1,162 @@
+﻿<style>
+
+    #trigger-upload {
+        color: white;
+        background-color: #00ABC7;
+        font-size: 14px;
+        padding: 7px 20px;
+        background-image: none;
+    }
+
+    #Query {
+        color: white;
+        background-color: #00ABC7;
+        font-size: 14px;
+        padding: 7px 20px;
+        background-image: none;
+    }
+
+    #fine-uploader-manual-trigger .qq-upload-button {
+        margin-right: 15px;
+    }
+
+    #fine-uploader-manual-trigger .buttons {
+        width: 36%;
+    }
+
+    #fine-uploader-manual-trigger .qq-uploader .qq-total-progress-bar-container {
+        width: 60%;
+    }
+</style>
+<div class="content">
+    <div class="form-horizontal">
+        <div id="customer-edit" class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                @Html.RenderBootstrapTabHeader("tab-info", new LocalizedString("相册信息"), true)
+            </ul>
+            <div class="tab-content">
+                @Html.RenderBootstrapTabContent("tab-info", @TabInfo(), true)
+            </div>
+        </div>
+    </div>
+</div>
+
+@*save selected tab name*@
+<input type="hidden" id="selected-tab-name" name="selected-tab-name" value="@(Html.GetSelectedTabName())">
+
+@helper TabInfo()
+{
+    /**/
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label for="albumName">相册名称</label>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="albumName" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label for="coverImg">相册封面</label>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <input type="file" id="coverImg" style="margin-top:15px;" onchange="uploadImg(this)" />
+                        <img id="img" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            <label for="albumDesc">相册描述</label>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <textarea rows="5" class="form-control" id="albumDesc"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    function uploadImg(obj) {
+        var file = obj.files[0];
+        //判断类型是不是图片
+        if (!/image\/\w+/.test(file.type)) {
+            alert("请确保文件为图像类型");
+            return false;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            dealImage(this.result, { width: 200 }, function (base) {
+                document.getElementById('img').setAttribute('src', base)
+            });
+        }
+    }
+    function dealImage(path, obj, callback) {
+        var img = new Image();
+        img.src = path;
+        img.onload = function () {
+            var that = this;
+            // 默认按比例压缩
+            var w = that.width,
+                h = that.height,
+                scale = w / h;
+            w = obj.width || w;
+            h = obj.height || (w / scale);
+            var quality = 0.7; // 默认图片质量为0.7
+            //生成canvas
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            // 创建属性节点
+            var anw = document.createAttribute("width");
+            anw.nodeValue = w;
+            var anh = document.createAttribute("height");
+            anh.nodeValue = h;
+            canvas.setAttributeNode(anw);
+            canvas.setAttributeNode(anh);
+            ctx.drawImage(that, 0, 0, w, h);
+            // 图像质量
+            if (obj.quality && obj.quality <= 1 && obj.quality > 0) {
+                quality = obj.quality;
+            }
+            // quality值越小，所绘制出的图像越模糊
+            var base64 = canvas.toDataURL('image/jpeg', quality);
+            // 回调函数返回base64的值
+            callback(base64);
+        }
+    }
+
+    $(function () {
+        $("#btnSave").click(function () {
+            var $coverimg = $("img").attr("src");
+            var albumName = $("#albumName").val();
+            var albumDesc = $("#albumDesc").val();
+            $.ajax({
+                type: "POST",
+                url: "/Photo/Add",
+                data: { "AlbumName": albumName, "CoverImg": $coverimg, "PhotoNum": "", "AlbumDesc": albumDesc },
+                success: function (data) {
+                    debugger
+                    if (data.IsSuccess) {
+                        layer.alert("新增成功");
+                    } else {
+                        layer.alert("新增失败");
+                    }
+                },
+                fail: function (err) {
+                    layer.alert("新增异常:" + err);
+                }
+            })
+        });
+    })
+</script>

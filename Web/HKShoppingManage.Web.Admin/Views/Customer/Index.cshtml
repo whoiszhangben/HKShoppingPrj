@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "客户管理";
+    Html.SetActiveMenuItemSystemName("Customer");
+}
+<div class="content-header clearfix">
+    <div class="pull-left">
+
+    </div>
+    <div class="pull-right">
+        <a href="@Url.Action("Create")" class="btn bg-blue">
+            <i class="fa fa-plus-square"></i>
+            <span>新增客户</span>
+        </a>
+    </div>
+</div>
+
+<div class="content">
+    <table class="table table-bordered table-condensed">
+        <thead style="font-weight:900;"><tr><th>序号</th><th>姓名</th><th>助记码</th><th>手机号码</th><th>地址</th><th>备注</th><th>操作</th></tr></thead>
+        <tbody id="customers-grid"></tbody>
+    </table>
+    <div id="Pagination" class="paginationEx"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetCusLst();
+    });
+    function GetCusLst() {
+        pageHelper.Init({
+            url: "/Customer/GetPageList",
+            type: "POST",
+            data:
+            {
+                CusName: "",
+                CusTelephone:"",
+                rId: Math.random()
+            },
+            bind: function (data) {
+                var html = "";
+                $(data.Data.Data).each(function (index, dom) {
+                    //每行html
+                    var trHtml = [
+                        '<tr>',
+                        '   <td width="50" class="text-center">{0}</td>',
+                        '   <td width="100" class="text-center">{1}</td>',
+                        '   <td width="100" class="text-center">{7}</td>',
+                        '   <td width="200" class="text-center">{2}</td>',
+                        '   <td style="text-align:left;">{3}</td>',
+                        '   <td width="200">{4}</td>',
+                        '   <td width="200" class="text-center">',
+                        '       <a title="详情" href="javascript:void 0;" class="aLinkgap DetailCls" attrId={6}>详情</a>',
+                        '       <a title="编辑" href="javascript:void 0;" class="aLinkgap EditViewCls" attrId={6} attrAssetCode={5}>编辑</a>',
+                        '       <a title="删除" href="javascript:void 0;" class="aLinkgap DeleteCls" attrId={6} attrAssetCode={5}>删除</a>',
+                        '   </td>',
+                        '</tr>',
+                    ].join('');
+                    //拼接tbody
+                    html += StringHelper.FormatStr(trHtml,
+                        (index + 1),
+                        dom.CusName,
+                        dom.CusTelephone,
+                        dom.CusAddress,
+                        dom.CusRemark,
+                        dom.IsValid,
+                        dom.Id,
+                        dom.HelpCode
+                    );
+                });
+                $("#customers-grid").html(html);
+            }
+        });
+    }
+</script>

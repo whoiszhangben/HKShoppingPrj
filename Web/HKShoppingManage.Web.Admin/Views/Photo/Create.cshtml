@@ -1,0 +1,24 @@
+﻿@using HKShoppingManage.Model
+@model Customer
+@{
+    //page title
+    ViewBag.Title = "新增相册";
+    //active menu item (system name)
+    Html.SetActiveMenuItemSystemName("Photo");
+}
+@using (Html.BeginForm())
+{
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            添加新相册
+            <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink("返回相册列表", "Index")</small>
+        </h1>
+        <div class="pull-right">
+            <button type="button" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                <span id="btnSave">保存</span>
+            </button>
+        </div>
+    </div>
+    @Html.Partial("_CreateOrUpdate", Model)
+}

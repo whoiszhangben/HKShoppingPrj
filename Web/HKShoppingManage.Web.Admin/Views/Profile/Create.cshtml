@@ -1,0 +1,23 @@
+﻿@using HKShoppingManage.Model
+@model Vendor
+@{
+    //page title
+    ViewBag.Title = "档案管理";
+    Html.SetActiveMenuItemSystemName("Work");
+}
+@using (Html.BeginForm())
+{
+<div class="content-header clearfix">
+    <h1 class="pull-left">
+        新增档案
+        <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink("返回档案列表", "Index")</small>
+    </h1>
+    <div class="pull-right">
+        <button type="submit" name="save" class="btn bg-blue">
+            <i class="fa fa-floppy-o"></i>
+            <span id="btnSave">保存</span>
+        </button>
+    </div>
+</div>
+    @Html.Partial("_CreateOrUpdate", Model)
+}

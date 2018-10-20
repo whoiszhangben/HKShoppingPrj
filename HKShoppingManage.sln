@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.4
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HKShoppingManage.Model", "Model\HKShoppingManage.Model.csproj", "{CB107F2F-EC64-485D-80CA-6243DDDE02D6}"
 EndProject
@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dll", "Dll", "{E13F5029-D60
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HKShoppingManage.Web.Admin", "Web\HKShoppingManage.Web.Admin\HKShoppingManage.Web.Admin.csproj", "{34E4B761-879E-49B4-8E71-33C2DB3BA75B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HKShoppingManage.WebAPI", "WebAPI\HKShoppingManage.WebAPI.csproj", "{E7E4CA23-C703-4DEC-B7C2-8D7175065536}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,11 +65,18 @@ Global
 		{34E4B761-879E-49B4-8E71-33C2DB3BA75B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34E4B761-879E-49B4-8E71-33C2DB3BA75B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34E4B761-879E-49B4-8E71-33C2DB3BA75B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7E4CA23-C703-4DEC-B7C2-8D7175065536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7E4CA23-C703-4DEC-B7C2-8D7175065536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7E4CA23-C703-4DEC-B7C2-8D7175065536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7E4CA23-C703-4DEC-B7C2-8D7175065536}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E13F5029-D600-4A48-BE48-7AA7FECED3D0} = {B84A9DC5-CC22-452D-B85E-897537067735}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0425214F-AE25-4E8A-BDD6-CE9771E9E5CC}
 	EndGlobalSection
 EndGlobal

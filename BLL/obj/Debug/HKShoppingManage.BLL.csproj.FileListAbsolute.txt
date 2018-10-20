@@ -1,3 +1,4 @@
+E:\港代项目\HKShoppingManage\BLL\obj\Debug\HKShoppingManage.BLL.csproj.CoreCompileInputs.cache
 E:\港代项目\HKShoppingManage\BLL\bin\Debug\HKShoppingManage.BLL.dll
 E:\港代项目\HKShoppingManage\BLL\bin\Debug\HKShoppingManage.BLL.pdb
 E:\港代项目\HKShoppingManage\BLL\bin\Debug\HKShoppingManage.Common.dll
@@ -11,6 +12,7 @@ E:\港代项目\HKShoppingManage\BLL\bin\Debug\HKShoppingManage.Common.pdb
 E:\港代项目\HKShoppingManage\BLL\bin\Debug\HKShoppingManage.DAL.pdb
 E:\港代项目\HKShoppingManage\BLL\bin\Debug\HKShoppingManage.Model.pdb
 E:\港代项目\HKShoppingManage\BLL\bin\Debug\HKShoppingManage.DBUtility.pdb
-E:\港代项目\HKShoppingManage\BLL\obj\Debug\HKShoppingManage.BLL.csprojResolveAssemblyReference.cache
+E:\港代项目\HKShoppingManage\BLL\obj\Debug\HKShoppingManage.BLL.csprojAssemblyReference.cache
+E:\港代项目\HKShoppingManage\BLL\obj\Debug\HKShoppingManage.BLL.csproj.CopyComplete
 E:\港代项目\HKShoppingManage\BLL\obj\Debug\HKShoppingManage.BLL.dll
 E:\港代项目\HKShoppingManage\BLL\obj\Debug\HKShoppingManage.BLL.pdb

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ProductUnitXML>
+  <ProductUnits>
+    <ProductUnitModel>
+      <Key>1</Key>
+      <Value>个</Value>
+    </ProductUnitModel>
+    <ProductUnitModel>
+      <Key>2</Key>
+      <Value>件</Value>
+    </ProductUnitModel>
+    <ProductUnitModel>
+      <Key>3</Key>
+      <Value>箱</Value>
+    </ProductUnitModel>
+    <ProductUnitModel>
+      <Key>4</Key>
+      <Value>盒</Value>
+    </ProductUnitModel>
+    <ProductUnitModel>
+      <Key>5</Key>
+      <Value>瓶</Value>
+    </ProductUnitModel>
+    <ProductUnitModel>
+      <Key>6</Key>
+      <Value>块</Value>
+    </ProductUnitModel>
+  </ProductUnits>
+</ProductUnitXML>

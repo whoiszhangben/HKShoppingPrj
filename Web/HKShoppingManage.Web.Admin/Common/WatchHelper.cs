@@ -42,6 +42,11 @@ namespace HKShoppingManage.Web.Admin
                             UnitFactory.Init();
                         }
                         break;
+                    case "certificationLst.xml":
+                        {
+                            CertificationFactory.Init();
+                        }
+                        break;
                     default:
                         break;
                 }

@@ -1346,9 +1346,12 @@ span.grid-report-item.red {
         float: left;
     }
 }
-.pagination{ padding-right: 3px; padding-left: 3px; padding-bottom: 3px; margin: 12px; padding-top: 12px;text-align: right;margin:0 auto;height: 60px;width: 100%;}    
-.pagination a{text-decoration:none;border:solid 1px #AAE;color:#428bca;}
-.pagination a,.pagination span{display:inline-block;padding:0.3em 0.5em;margin-right:5px;margin-bottom:5px;}
-.pagination .current{background:#26B;color:#fff;border:solid 1px #AAE;}
-.pagination .current.prev, .pagination .current.next{color:#999;border-color:#999;background:#fff;}
+.paginationEx{ padding-right: 3px; padding-left: 3px; padding-bottom: 3px; margin: 12px; padding-top: 12px;text-align: right;margin:0 auto;height: 60px;width: 100%;}    
+.paginationEx a{text-decoration:none;border:solid 1px #AAE;color:#428bca;}
+.paginationEx a,.paginationEx span{display:inline-block;padding:0.3em 0.5em;margin-right:5px;margin-bottom:5px;}
+.paginationEx .current{background:#26B;color:#fff;border:solid 1px #AAE;}
+.paginationEx .current.prev, .paginationEx .current.next{color:#999;border-color:#999;background:#fff;}
 .aLinkgap {margin: 0 6px;}
+.purchaseOrderNo{position:absolute;margin:10px 0px 10px 5px;}
+.purchaseOrderNo span{margin:0 10px;}
+.purchaseOrderNo span>input[type="text"]{border-radius:2px;width:100px;}

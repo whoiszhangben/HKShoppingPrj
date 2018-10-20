@@ -1,0 +1,108 @@
+﻿@using HKShoppingManage.Model
+@model Vendor
+
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+
+<div class="content">
+    <div class="form-horizontal">
+        <div id="customer-edit" class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                @Html.RenderBootstrapTabHeader("tab-info", new LocalizedString("供应商信息"), true)
+            </ul>
+            <div class="tab-content">
+                @Html.RenderBootstrapTabContent("tab-info", @TabInfo(), true)
+            </div>
+        </div>
+    </div>
+</div>
+
+@*save selected tab name*@
+<input type="hidden" id="selected-tab-name" name="selected-tab-name" value="@(Html.GetSelectedTabName())">
+
+@helper TabInfo()
+{
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            @Html.LabelFor(model => model.VendorName)
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.VendorName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.VendorName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            @Html.LabelFor(model => model.HelpCode)
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.HelpCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.HelpCode)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            @Html.LabelFor(model => model.VendorTel)
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.VendorTel, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.VendorTel)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            @Html.LabelFor(model => model.VendorAddress)
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.VendorAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.VendorAddress)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            @Html.LabelFor(model => model.VendorEmail)
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.VendorEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.VendorEmail)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            @Html.LabelFor(model => model.VendorFax)
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.VendorFax, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.VendorFax)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="label-wrapper">
+                            @Html.LabelFor(model => model.Remark)
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.Remark, new { @class = "form-control", @rows = "5" })
+                        @Html.ValidationMessageFor(model => model.Remark)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
