@@ -38,12 +38,12 @@ namespace HKShoppingManage.Model
         /// 电话号码
         /// </summary>
         [DisplayName("电话号码")]
-        public int EmpTelNo { get; set; }
+        public string EmpTelNo { get; set; }
         /// <summary>
         /// 是否离职
         /// </summary>
         [DisplayName("是否离职")]
-        public string IsDimissioned { get; set; }
+        public bool IsDimissioned { get; set; }
         /// <summary>
         /// 员工资料值
         /// </summary>

@@ -6,59 +6,200 @@
 @Styles.Render("~/Content/bootstrap-table.min.css")
 @Scripts.Render("~/Scripts/bootstrap-table.min.js")
 @Scripts.Render("~/Scripts/bootstrap-table-zh-CN.js")
+<style type="text/css">
+    .containerX span {
+        position: relative;
+    }
+
+    .containerX label {
+        margin: 0;
+    }
+
+    .containerX .input_check {
+        position: absolute;
+        visibility: hidden;
+    }
+
+        .containerX .input_check + label {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 1px solid #ccc;
+            margin-bottom: -2px;
+        }
+
+        .containerX .input_check:checked + label:after {
+            content: "";
+            position: absolute;
+            left: 3px;
+            bottom: 8px;
+            width: 9px;
+            height: 6px;
+            border: 2px solid #fd8845;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            -ms-transform: rotate(-60deg);
+            -moz-transform: rotate(-60deg);
+            -webkit-transform: rotate(-60deg);
+            transform: rotate(-45deg);
+        }
+</style>
+
 <div class="content">
-    <div style="float:right;margin:10px 0px 10px 5px">
-        <button type="button" class="btn btn-default" id="btnAdd" title="新增">
-            <span style="color:#008000;background-color:#efefef;font-weight:bold;"></span>
-            <span class="glyphicon glyphicon-plus"></span>
-        </button>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <div class="label-wrapper">
+                        <label for="ProfileNo">档案编号</label>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="ProfileNo" disabled="disabled" value="@ViewBag.ProfileNo" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <div class="label-wrapper">
+                        <label for="EmpName">员工名称</label>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="EmpName" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <div class="label-wrapper">
+                        <label for="EmpIDNo">身份证号码</label>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="EmpIDNo" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3">
+                    <div class="label-wrapper">
+                        <label for="EmpTelNo">电话号码</label>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="EmpTelNo" />
+                </div>
+            </div>
+            <div class="form-group" style="margin-top:5px;margin-bottom:5px;">
+                <div class="col-md-3">
+                    <div class="label-wrapper">
+                        <label for="IsDimissioned">是否离职</label>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <input name="chk" type="radio" value="0" checked="checked" /> 否
+                    <input name="chk" type="radio" value="1" /> 是
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group" style="margin-top:5px;margin-bottom:5px;">
+                <div class="col-md-3">
+                    <label>资料列表</label>
+                </div>
+                <div class="col-md-9">
+                    <span class="containerX">
+                        @foreach (var item in ViewBag.CertificationLst)
+                        {
+                            <span><input name="certification" type="checkbox" class="input_check" value="@Math.Pow(2.0, double.Parse(item.Key))" id="@item.Key" /><label for="@item.Key"></label>&nbsp;@item.Value</span>
+                        }
+                    </span>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group" style="margin-top:5px;margin-bottom:5px;">
+                <div class="col-md-12 text-center">
+                    <button id="btnSave" class="btn btn-sm btn-primary" style="width:60px;">保存</button>
+                </div>
+            </div>
+        </div>
     </div>
     <table class="table table-bordered table-condensed" id="testTB"></table>
 </div>
-<script type="text/javascript">
-    function initTable() {
-        $("#testTB").bootstrapTable("destroy");
-        $("#testTB").bootstrapTable({
-            method: "POST",
-            url: "/Profile/GetList",
-            editable: true,//开启编辑模式
-            clickToSelect: true,
-            cache: false,
-            showToggle: true, //显示切换按钮来切换表/卡片视图。
-            showPaginationSwitch: true, //显示分页切换按钮
-            pagination: true,
-            pageList: [10, 25, 50, 100],
-            pageSize: 10,
-            pageNumber: 1,
-            sidePagination:'server',
-            uniqueId: 'Id', //将index列设为唯一索引
-            striped: true,
-            search: false,
-            showRefresh: true,
-            minimumCountColumns: 2,
-            smartDisplay: true,
-            columns: [
-                { field: "ProfileNo", title: "档案编号", align: "center", sortable: "true" },
-                { field: "EmpName", title: "员工名称", align: "center", sortable: "true" },
-                { field: "EmpIDNo", title: "身份证号码", align: "center", sortable: "true" },
-                { field: "EmpTelNo", title: "电话号码", align: "center", sortable: "true" },
-                { field: "IsDimissioned", title: "是否离职", align: "center", sortable: "true" },
-                { field: "RelationVal", title: "资料列表", align: "center", sortable: "true" },
-                {
-                    field: "action", title: "操作", align: "center", formatter: function (value, row, index) {
-                        var strHtml = '<a href="./index.php?r=subprocess/modify&id=' + row.Id + '"><li class="glyphicon glyphicon-pencil"></li></a>' +
-                            '<a href="javascript:void(0);" onclick="removeData(' + index + ')" style="margin-left:5px;"><li class="glyphicon glyphicon-remove"></li></a>';
-                        return strHtml;
-                    }, edit: false
-                }
-            ]
-        })
-    }
-    $(function () {
-        initTable();
-        $("#btnAdd").unbind("click").bind("click", function () {
-            location.href = "/Profile/Create";
-        });
-    });
+        <script type="text/javascript">
+            function initTable() {
+                $("#testTB").bootstrapTable("destroy");
+                $("#testTB").bootstrapTable({
+                    method: "POST",
+                    url: "/Profile/GetList",
+                    editable: false,//开启编辑模式
+                    clickToSelect: false,
+                    cache: false,
+                    showToggle: false, //显示切换按钮来切换表/卡片视图。
+                    showPaginationSwitch: false, //显示分页切换按钮
+                    pagination: true,
+                    pageList: [10, 25, 50, 100],
+                    pageSize: 10,
+                    pageNumber: 1,
+                    sidePagination: 'server',
+                    uniqueId: 'Id', //将index列设为唯一索引
+                    striped: false,
+                    search: false,
+                    showRefresh: false,
+                    minimumCountColumns: 2,
+                    smartDisplay: false,
+                    columns: [
+                        { field: "ProfileNo", title: "档案编号", align: "center", sortable: "true" },
+                        { field: "EmpName", title: "员工名称", align: "center", sortable: "true" },
+                        { field: "EmpIDNo", title: "身份证号码", align: "center", sortable: "true" },
+                        { field: "EmpTelNo", title: "电话号码", align: "center", sortable: "true" },
+                        { field: "IsDimissioned", title: "是否离职", align: "center", sortable: "true" },
+                        { field: "RelationVal", title: "资料列表", align: "center", sortable: "true" },
+                        {
+                            field: "action", title: "操作", align: "center", formatter: function (value, row, index) {
+                                var strHtml = '<a href="./index.php?r=subprocess/modify&id=' + row.Id + '"><li class="glyphicon glyphicon-pencil"></li></a>' +
+                                    '<a href="javascript:void(0);" onclick="removeData(' + index + ')" style="margin-left:5px;"><li class="glyphicon glyphicon-remove"></li></a>';
+                                return strHtml;
+                            }, edit: false
+                        }
+                    ]
+                })
+            }
+            $(function () {
+                initTable();
 
-</script>
+                $("#btnSave").click(function () {
+                    var $ProfileNo = $("#ProfileNo").val().trim();
+                    var $EmpName = $("#EmpName").val().trim();
+                    var $EmpIDNo = $("#EmpIDNo").val().trim();
+                    var $EmpTelNo = $("#EmpTelNo").val().trim();
+                    var $IsDimission = $("input[name='chk']:checked").val() == "1" ? true : false;
+
+                    $certification = $("input[name='certification']");
+                    var combineType = 0;
+                    $certification.each(function (index, item) {
+                        var $this = $(this);
+                        if ($this.prop("checked") == true) {
+                            combineType += parseInt($this.val(), 10);
+                        }
+                    });
+                    var $RelationVal = combineType;
+                    $.ajax({
+                        type: "POST",
+                        url: "/Profile/Add",
+                        data: { "ProfileNo": $ProfileNo, "EmpName": $EmpName, "EmpIDNo": $EmpIDNo, "EmpTelNo": $EmpTelNo, "IsDimissioned": $IsDimission, "RelationVal": $RelationVal },
+                        success: function (data) {
+                            debugger
+                            if (data.IsSuccess) {
+                                layer.alert("新增成功", function () {
+                                    location.reload(true);
+                                });
+                            } else {
+                                layer.alert("新增失败");
+                            }
+                        },
+                        fail: function (err) {
+                            layer.alert("新增异常:" + err);
+                        }
+                    })
+                });
+            });
+
+        </script>

@@ -32,7 +32,7 @@ namespace HKShoppingManage.DAL
                     StringBuilder strSql = new StringBuilder();
                     var param = new DynamicParameters();
 
-                    #region Album
+                    #region Profiles
                     strSql.Append("insert into Profiles(");
                     strSql.Append("ProfileNo,EmpName,EmpIDNo,EmpTelNo,IsDimissioned,RelationVal,CreateTime,Creator,UpdateTime,Updator)");
 

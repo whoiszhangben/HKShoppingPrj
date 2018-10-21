@@ -19,12 +19,13 @@ namespace HKShoppingManage.Web.Admin.Controllers
         // GET: Profile
         public ActionResult Index()
         {
+            ViewBag.ProfileNo = this.bll.GenerateBillNo();
+            ViewBag.CertificationLst = CertificationFactory.model.CertificationLst;
             return View();
         }
         public ActionResult Create()
         {
-            ViewBag.ProfileNo = this.bll.GenerateBillNo();
-            ViewBag.CertificationLst = CertificationFactory.model.CertificationLst;
+            
             return View();
         }
 
