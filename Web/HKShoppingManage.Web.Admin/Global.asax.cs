@@ -19,7 +19,7 @@ namespace HKShoppingManage.Web.Admin
         protected void Application_Start()
         {
             var config = GlobalConfiguration.Configuration;
-            GlobalConfiguration.Configuration.AddJsonpFormatter(config.Formatters.JsonForma‌​tter, "callback");
+            GlobalConfiguration.Configuration.AddJsonpFormatter(config.Formatters.JsonFormatter, "callback");
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

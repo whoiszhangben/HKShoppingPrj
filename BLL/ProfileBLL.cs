@@ -24,5 +24,9 @@ namespace HKShoppingManage.BLL
         {
             return await this.dal.GetList();
         }
+        public string GenerateBillNo()
+        {
+            return this.dal.GenerateBillNo();
+        }
     }
 }

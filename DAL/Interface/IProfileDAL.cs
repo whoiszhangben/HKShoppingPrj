@@ -21,5 +21,7 @@ namespace HKShoppingManage.DAL
         #region 查
         Task<List<Profile>> GetList();
         #endregion
+
+        string GenerateBillNo();
     }
 }

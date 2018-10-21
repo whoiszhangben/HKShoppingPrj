@@ -10,3 +10,13 @@ E:\港代项目\HKShoppingManage\DBUtility\obj\Debug\HKShoppingManage.DBUtility.
 E:\港代项目\HKShoppingManage\DBUtility\obj\Debug\HKShoppingManage.DBUtility.csproj.CopyComplete
 E:\港代项目\HKShoppingManage\DBUtility\obj\Debug\HKShoppingManage.DBUtility.dll
 E:\港代项目\HKShoppingManage\DBUtility\obj\Debug\HKShoppingManage.DBUtility.pdb
+G:\BenProjects\HKShoppingPrj\DBUtility\bin\Debug\HKShoppingManage.DBUtility.dll
+G:\BenProjects\HKShoppingPrj\DBUtility\bin\Debug\HKShoppingManage.DBUtility.pdb
+G:\BenProjects\HKShoppingPrj\DBUtility\bin\Debug\Dapper.dll
+G:\BenProjects\HKShoppingPrj\DBUtility\bin\Debug\HKShoppingManage.Common.dll
+G:\BenProjects\HKShoppingPrj\DBUtility\bin\Debug\log4net.dll
+G:\BenProjects\HKShoppingPrj\DBUtility\bin\Debug\EmitMapper.dll
+G:\BenProjects\HKShoppingPrj\DBUtility\bin\Debug\HKShoppingManage.Common.pdb
+G:\BenProjects\HKShoppingPrj\DBUtility\obj\Debug\HKShoppingManage.DBUtility.csprojResolveAssemblyReference.cache
+G:\BenProjects\HKShoppingPrj\DBUtility\obj\Debug\HKShoppingManage.DBUtility.dll
+G:\BenProjects\HKShoppingPrj\DBUtility\obj\Debug\HKShoppingManage.DBUtility.pdb

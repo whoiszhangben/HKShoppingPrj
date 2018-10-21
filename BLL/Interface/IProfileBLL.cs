@@ -21,5 +21,6 @@ namespace HKShoppingManage.BLL
         #region
         Task<List<Profile>> GetList();
         #endregion
+        String GenerateBillNo();
     }
 }

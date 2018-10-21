@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" class="form-control" id="ProfileNo" disabled="disabled" value="XHK0001" />
+                        <input type="text" class="form-control" id="ProfileNo" disabled="disabled" value="@ViewBag.ProfileNo" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -117,7 +117,7 @@
                         <span class="containerX">
                             @foreach (var item in ViewBag.CertificationLst)
                             {
-                                <span><input name="certification" type="checkbox" class="input_check" value="@Math.Pow(2.0, double.Parse(item.Key));" id="@item.Key"/><label for="@item.Key"></label>&nbsp;@item.Value</span>
+                                <span><input name="certification" type="checkbox" class="input_check" value="@Math.Pow(2.0, double.Parse(item.Key))" id="@item.Key"/><label for="@item.Key"></label>&nbsp;@item.Value</span>
                             }
                         </span>
                     </div>

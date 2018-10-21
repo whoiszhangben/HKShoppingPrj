@@ -404,3 +404,14 @@ GO
 /****** Object:  Default [DF_Profiles_IsDimissioned]    Script Date: 10/20/2018 16:00:11 ******/
 ALTER TABLE [dbo].[Profiles] ADD  CONSTRAINT [DF_Profiles_IsDimissioned]  DEFAULT ((0)) FOR [IsDimissioned]
 GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[Proc_GenerateBillNo]
+@BillNo VARCHAR(15) OUTPUT AS
+
+DECLARE @maxid INT
+DECLARE @prefix VARCHAR(6)
+SET @maxid = IDENT_CURRENT('Profiles');
+SET @prefix = 'HX-QT-';
+SELECT @BillNo = @prefix + REPLICATE('0',5-DATALENGTH(CONVERT(VARCHAR,@maxid))) + CONVERT(VARCHAR,@maxid + 1)

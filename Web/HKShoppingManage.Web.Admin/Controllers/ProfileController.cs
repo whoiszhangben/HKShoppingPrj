@@ -23,6 +23,7 @@ namespace HKShoppingManage.Web.Admin.Controllers
         }
         public ActionResult Create()
         {
+            ViewBag.ProfileNo = this.bll.GenerateBillNo();
             ViewBag.CertificationLst = CertificationFactory.model.CertificationLst;
             return View();
         }
@@ -44,7 +45,13 @@ namespace HKShoppingManage.Web.Admin.Controllers
             {
                 return Json(new JsonModel(false, "", "新增失败"));
             }
+        }
 
+        [HttpPost]
+        public async Task<JsonResult> GetList()
+        {
+            var result = await this.bll.GetList();
+            return Json(new JsonModelBootstrapTable(result.Count, result));
         }
     }
 }

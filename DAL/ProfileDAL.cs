@@ -109,5 +109,19 @@ namespace HKShoppingManage.DAL
             return list;
         }
         #endregion
+
+        public string GenerateBillNo()
+        {
+            var param = new DynamicParameters();
+            string BillNo = string.Empty;
+            using (var conn = DBConnFactory.CreateSqlConnection())
+            {
+                conn.Open();
+                param.Add("@BillNo", dbType: DbType.StringFixedLength, direction: ParameterDirection.Output, size: 15);
+                var temp = conn.Query("Proc_GenerateBillNo", param, commandType: CommandType.StoredProcedure);
+                BillNo = param.Get<string>("@BillNo");
+            }
+            return BillNo;
+        }
     }
 }

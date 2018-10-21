@@ -20,7 +20,7 @@
         $("#testTB").bootstrapTable("destroy");
         $("#testTB").bootstrapTable({
             method: "POST",
-            url: "/Vendor/GetList",
+            url: "/Profile/GetList",
             editable: true,//开启编辑模式
             clickToSelect: true,
             cache: false,
@@ -38,14 +38,12 @@
             minimumCountColumns: 2,
             smartDisplay: true,
             columns: [
-                { field: "Id", title: "序号", align: "center", sortable: "true" },
-                { field: "VendorName", title: "供应商名称", align: "center", sortable: "true" },
-                { field: "HelpCode", title: "助记码", align: "center", sortable: "true" },
-                { field: "VendorAddress", title: "地址", align: "center", sortable: "true" },
-                { field: "VendorTel", title: "电话", align: "center", sortable: "true" },
-                { field: "VendorFax", title: "传真", align: "center", sortable: "true" },
-                { field: "VendorEmail", title: "EMail", align: "center", sortable: "true" },
-                { field: "VendorWx", title: "微信", align: "center", sortable: "true" },
+                { field: "ProfileNo", title: "档案编号", align: "center", sortable: "true" },
+                { field: "EmpName", title: "员工名称", align: "center", sortable: "true" },
+                { field: "EmpIDNo", title: "身份证号码", align: "center", sortable: "true" },
+                { field: "EmpTelNo", title: "电话号码", align: "center", sortable: "true" },
+                { field: "IsDimissioned", title: "是否离职", align: "center", sortable: "true" },
+                { field: "RelationVal", title: "资料列表", align: "center", sortable: "true" },
                 {
                     field: "action", title: "操作", align: "center", formatter: function (value, row, index) {
                         var strHtml = '<a href="./index.php?r=subprocess/modify&id=' + row.Id + '"><li class="glyphicon glyphicon-pencil"></li></a>' +

@@ -6,3 +6,10 @@ E:\港代项目\HKShoppingManage\Common\obj\Debug\HKShoppingManage.Common.csproj
 E:\港代项目\HKShoppingManage\Common\obj\Debug\HKShoppingManage.Common.csproj.CopyComplete
 E:\港代项目\HKShoppingManage\Common\obj\Debug\HKShoppingManage.Common.dll
 E:\港代项目\HKShoppingManage\Common\obj\Debug\HKShoppingManage.Common.pdb
+G:\BenProjects\HKShoppingPrj\Common\bin\Debug\HKShoppingManage.Common.dll
+G:\BenProjects\HKShoppingPrj\Common\bin\Debug\HKShoppingManage.Common.pdb
+G:\BenProjects\HKShoppingPrj\Common\bin\Debug\EmitMapper.dll
+G:\BenProjects\HKShoppingPrj\Common\bin\Debug\log4net.dll
+G:\BenProjects\HKShoppingPrj\Common\obj\Debug\HKShoppingManage.Common.dll
+G:\BenProjects\HKShoppingPrj\Common\obj\Debug\HKShoppingManage.Common.pdb
+G:\BenProjects\HKShoppingPrj\Common\obj\Debug\HKShoppingManage.Common.csprojResolveAssemblyReference.cache
