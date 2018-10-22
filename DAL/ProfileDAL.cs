@@ -57,7 +57,7 @@ namespace HKShoppingManage.DAL
                     //根据RelationVal 向关系中插入关联数据 
                     for (int i = 0; i < 10; i++)
                     {
-                        if ((model.RelationVal & i) != 0)
+                        if ((model.RelationVal & (int)Math.Pow(2.0,(double)i)) != 0)
                         {
                             strSql.Clear();
                             param = new DynamicParameters();

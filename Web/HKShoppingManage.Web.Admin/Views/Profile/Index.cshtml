@@ -43,6 +43,10 @@
             -webkit-transform: rotate(-60deg);
             transform: rotate(-45deg);
         }
+    .toolbox{
+        margin:5px;
+        padding:5px;
+    }
 </style>
 
 <div class="content">
@@ -108,7 +112,7 @@
                     <span class="containerX">
                         @foreach (var item in ViewBag.CertificationLst)
                         {
-                            <span><input name="certification" type="checkbox" class="input_check" value="@Math.Pow(2.0, double.Parse(item.Key))" id="@item.Key" /><label for="@item.Key"></label>&nbsp;@item.Value</span>
+                            <span><input name="certification" type="checkbox" class="input_check" value="@Math.Pow(2.0, double.Parse(item.Key))" id="@item.Key"  data-name="@item.Value" /><label for="@item.Key"></label>&nbsp;@item.Value</span>
                         }
                     </span>
                 </div>
@@ -121,9 +125,27 @@
             </div>
         </div>
     </div>
-    <table class="table table-bordered table-condensed" id="testTB"></table>
+    <div class="listinfo">
+        <div class="form-inline toolbox">
+            <div class="form-group">
+                <span>员工名称</span><input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <span>身份证号</span><input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <span>身份证号</span><input type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <a class="btn btn-default btn-sm" href="#"><i class="fa fa-search fa-fw"></i> 查询</a><a class="btn btn-default btn-sm" href="#"><i class="fa fa-upload fa-fw"></i> 导入</a><a class="btn btn-default btn-sm" href="#"><i class="fa fa-download fa-fw"></i> 导出</a>
+            </div>
+        </div>
+        <table class="table table-bordered table-condensed" id="testTB"></table>
+    </div>
+    
 </div>
         <script type="text/javascript">
+            var cachedCertification = Object.create(null);
             function initTable() {
                 $("#testTB").bootstrapTable("destroy");
                 $("#testTB").bootstrapTable({
@@ -150,8 +172,24 @@
                         { field: "EmpName", title: "员工名称", align: "center", sortable: "true" },
                         { field: "EmpIDNo", title: "身份证号码", align: "center", sortable: "true" },
                         { field: "EmpTelNo", title: "电话号码", align: "center", sortable: "true" },
-                        { field: "IsDimissioned", title: "是否离职", align: "center", sortable: "true" },
-                        { field: "RelationVal", title: "资料列表", align: "center", sortable: "true" },
+                        {
+                            field: "IsDimissioned", title: "是否离职", align: "center", sortable: "true", formatter: function (value, row, index) {
+                                return value ? '是' : '否';
+                            }
+                        },
+                        {
+                            field: "RelationVal", title: "资料列表", align: "center", sortable: "true", formatter: function (value, row, index) {
+                                var strHtml = '', len = Object.getOwnPropertyNames(cachedCertification).length;
+                                for (let i = 0; i < len; i++) {
+                                    if (value & Math.pow(2, i)) {
+                                        strHtml += '<span>' + cachedCertification['id' + i] + '</span>&nbsp;&nbsp;';
+                                    } else {
+                                        strHtml += '<span style="text-decoration:line-through;color:blue;">' + cachedCertification['id' + i] + '</span>&nbsp;&nbsp;';
+                                    }
+                                }
+                                return strHtml;
+                            }
+                        },
                         {
                             field: "action", title: "操作", align: "center", formatter: function (value, row, index) {
                                 var strHtml = '<a href="./index.php?r=subprocess/modify&id=' + row.Id + '"><li class="glyphicon glyphicon-pencil"></li></a>' +
@@ -163,6 +201,11 @@
                 })
             }
             $(function () {
+                $certification = $("input[name='certification']");
+                $certification.each(function (index, item) {
+                    var $this = $(this);
+                    cachedCertification['id' + $this.attr('id')] = $this.attr('data-name');
+                });
                 initTable();
 
                 $("#btnSave").click(function () {
@@ -172,7 +215,7 @@
                     var $EmpTelNo = $("#EmpTelNo").val().trim();
                     var $IsDimission = $("input[name='chk']:checked").val() == "1" ? true : false;
 
-                    $certification = $("input[name='certification']");
+                    var $certification = $("input[name='certification']");
                     var combineType = 0;
                     $certification.each(function (index, item) {
                         var $this = $(this);
