@@ -24,6 +24,11 @@ namespace HKShoppingManage.BLL
         {
             return await this.dal.GetList();
         }
+
+        public async Task<List<Profile>> GetListByConditions(string name, string idNo, string telNo)
+        {
+            return await this.dal.GetListByConditions(name, idNo, telNo);
+        }
         public string GenerateBillNo()
         {
             return this.dal.GenerateBillNo();

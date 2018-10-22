@@ -190,3 +190,198 @@ System.Data.SqlClient.SqlException (0x80131904): 将截断字符串或二进制数据。
    在 HKShoppingManage.DAL.ProfileDAL.<Insert>d__0.MoveNext() 位置 E:\港代项目\HKShoppingManage\DAL\ProfileDAL.cs:行号 54
 ClientConnectionId:fa353897-dcc5-4c27-8a08-e04ff0d769a5
 Error Number:8152,State:2,Class:16
+2018-10-22 23:03:22,633 [18] ERROR - 当前登陆用户ID：0
+消息类型：SqlException
+消息内容：“楚”附近有语法错误。
+引发异常的方法：System.Data.Common.DbDataReader <ExecuteDbDataReaderAsync>b__167_0(System.Threading.Tasks.Task`1[System.Data.SqlClient.SqlDataReader])
+引发异常源：
+.Net SqlClient Data Provider   在 System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__167_0(Task`1 result)
+   在 System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 Dapper.SqlMapper.<QueryAsync>d__147`1.MoveNext()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 HKShoppingManage.DAL.ProfileDAL.<GetListByConditions>d__10.MoveNext() 位置 g:\BenProjects\HKShoppingPrj\DAL\ProfileDAL.cs:行号 133
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 HKShoppingManage.BLL.ProfileBLL.<GetListByConditions>d__6.MoveNext() 位置 g:\BenProjects\HKShoppingPrj\BLL\ProfileBLL.cs:行号 30
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 HKShoppingManage.Web.Admin.Controllers.ProfileController.<GetListByConditions>d__b.MoveNext() 位置 g:\BenProjects\HKShoppingPrj\Web\HKShoppingManage.Web.Admin\Controllers\ProfileController.cs:行号 61
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+********************************************************************************************************************************************
+
+2018-10-22 23:03:33,000 [12] ERROR - 当前登陆用户ID：0
+消息类型：SqlException
+消息内容：“楚”附近有语法错误。
+引发异常的方法：System.Data.Common.DbDataReader <ExecuteDbDataReaderAsync>b__167_0(System.Threading.Tasks.Task`1[System.Data.SqlClient.SqlDataReader])
+引发异常源：
+.Net SqlClient Data Provider   在 System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__167_0(Task`1 result)
+   在 System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 Dapper.SqlMapper.<QueryAsync>d__147`1.MoveNext()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 HKShoppingManage.DAL.ProfileDAL.<GetListByConditions>d__10.MoveNext() 位置 g:\BenProjects\HKShoppingPrj\DAL\ProfileDAL.cs:行号 133
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 HKShoppingManage.BLL.ProfileBLL.<GetListByConditions>d__6.MoveNext() 位置 g:\BenProjects\HKShoppingPrj\BLL\ProfileBLL.cs:行号 30
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 HKShoppingManage.Web.Admin.Controllers.ProfileController.<GetListByConditions>d__b.MoveNext() 位置 g:\BenProjects\HKShoppingPrj\Web\HKShoppingManage.Web.Admin\Controllers\ProfileController.cs:行号 61
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+********************************************************************************************************************************************
+
+2018-10-22 23:06:30,525 [25] ERROR - 当前登陆用户ID：0
+消息类型：SqlException
+消息内容：“楚”附近有语法错误。
+引发异常的方法：System.Data.Common.DbDataReader <ExecuteDbDataReaderAsync>b__167_0(System.Threading.Tasks.Task`1[System.Data.SqlClient.SqlDataReader])
+引发异常源：
+.Net SqlClient Data Provider   在 System.Data.SqlClient.SqlCommand.<>c.<ExecuteDbDataReaderAsync>b__167_0(Task`1 result)
+   在 System.Threading.Tasks.ContinuationResultTaskFromResultTask`2.InnerInvoke()
+   在 System.Threading.Tasks.Task.Execute()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 Dapper.SqlMapper.<QueryAsync>d__147`1.MoveNext()
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 HKShoppingManage.DAL.ProfileDAL.<GetListByConditions>d__10.MoveNext() 位置 g:\BenProjects\HKShoppingPrj\DAL\ProfileDAL.cs:行号 133
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 HKShoppingManage.BLL.ProfileBLL.<GetListByConditions>d__6.MoveNext() 位置 g:\BenProjects\HKShoppingPrj\BLL\ProfileBLL.cs:行号 30
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   在 HKShoppingManage.Web.Admin.Controllers.ProfileController.<GetListByConditions>d__b.MoveNext() 位置 g:\BenProjects\HKShoppingPrj\Web\HKShoppingManage.Web.Admin\Controllers\ProfileController.cs:行号 61
+--- 引发异常的上一位置中堆栈跟踪的末尾 ---
+   在 System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   在 System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   在 System.Web.Mvc.Async.TaskAsyncActionDescriptor.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeAsynchronousActionMethod>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3d()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.AsyncInvocationWithFilters.<>c__DisplayClass46.<InvokeActionMethodFilterAsynchronouslyRecursive>b__3f()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<>c__DisplayClass2b.<BeginInvokeAction>b__1c()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__1e(IAsyncResult asyncResult)
+********************************************************************************************************************************************
+
+2018-10-22 23:14:35,360 [26] ERROR - 当前登陆用户ID：0
+消息类型：ArgumentException
+消息内容：无效的 JSON 基元: order。
+引发异常的方法：System.Object DeserializePrimitiveObject()
+引发异常源：
+System.Web.Extensions   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.DeserializePrimitiveObject()
+   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.DeserializeInternal(Int32 depth)
+   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.BasicDeserialize(String input, Int32 depthLimit, JavaScriptSerializer serializer)
+   在 System.Web.Script.Serialization.JavaScriptSerializer.Deserialize(JavaScriptSerializer serializer, String input, Type type, Int32 depthLimit)
+   在 System.Web.Mvc.JsonValueProviderFactory.GetDeserializedObject(ControllerContext controllerContext)
+   在 System.Web.Mvc.JsonValueProviderFactory.GetValueProvider(ControllerContext controllerContext)
+   在 System.Web.Mvc.ValueProviderFactoryCollection.GetValueProvider(ControllerContext controllerContext)
+   在 System.Web.Mvc.ControllerBase.get_ValueProvider()
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+********************************************************************************************************************************************
+
+2018-10-22 23:14:54,994 [17] ERROR - 当前登陆用户ID：0
+消息类型：ArgumentException
+消息内容：无效的 JSON 基元: order。
+引发异常的方法：System.Object DeserializePrimitiveObject()
+引发异常源：
+System.Web.Extensions   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.DeserializePrimitiveObject()
+   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.DeserializeInternal(Int32 depth)
+   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.BasicDeserialize(String input, Int32 depthLimit, JavaScriptSerializer serializer)
+   在 System.Web.Script.Serialization.JavaScriptSerializer.Deserialize(JavaScriptSerializer serializer, String input, Type type, Int32 depthLimit)
+   在 System.Web.Mvc.JsonValueProviderFactory.GetDeserializedObject(ControllerContext controllerContext)
+   在 System.Web.Mvc.JsonValueProviderFactory.GetValueProvider(ControllerContext controllerContext)
+   在 System.Web.Mvc.ValueProviderFactoryCollection.GetValueProvider(ControllerContext controllerContext)
+   在 System.Web.Mvc.ControllerBase.get_ValueProvider()
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+********************************************************************************************************************************************
+
+2018-10-22 23:14:56,315 [23] ERROR - 当前登陆用户ID：0
+消息类型：ArgumentException
+消息内容：无效的 JSON 基元: order。
+引发异常的方法：System.Object DeserializePrimitiveObject()
+引发异常源：
+System.Web.Extensions   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.DeserializePrimitiveObject()
+   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.DeserializeInternal(Int32 depth)
+   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.BasicDeserialize(String input, Int32 depthLimit, JavaScriptSerializer serializer)
+   在 System.Web.Script.Serialization.JavaScriptSerializer.Deserialize(JavaScriptSerializer serializer, String input, Type type, Int32 depthLimit)
+   在 System.Web.Mvc.JsonValueProviderFactory.GetDeserializedObject(ControllerContext controllerContext)
+   在 System.Web.Mvc.JsonValueProviderFactory.GetValueProvider(ControllerContext controllerContext)
+   在 System.Web.Mvc.ValueProviderFactoryCollection.GetValueProvider(ControllerContext controllerContext)
+   在 System.Web.Mvc.ControllerBase.get_ValueProvider()
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+********************************************************************************************************************************************
+
+2018-10-22 23:15:52,515 [25] ERROR - 当前登陆用户ID：0
+消息类型：ArgumentException
+消息内容：无效的 JSON 基元: order。
+引发异常的方法：System.Object DeserializePrimitiveObject()
+引发异常源：
+System.Web.Extensions   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.DeserializePrimitiveObject()
+   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.DeserializeInternal(Int32 depth)
+   在 System.Web.Script.Serialization.JavaScriptObjectDeserializer.BasicDeserialize(String input, Int32 depthLimit, JavaScriptSerializer serializer)
+   在 System.Web.Script.Serialization.JavaScriptSerializer.Deserialize(JavaScriptSerializer serializer, String input, Type type, Int32 depthLimit)
+   在 System.Web.Mvc.JsonValueProviderFactory.GetDeserializedObject(ControllerContext controllerContext)
+   在 System.Web.Mvc.JsonValueProviderFactory.GetValueProvider(ControllerContext controllerContext)
+   在 System.Web.Mvc.ValueProviderFactoryCollection.GetValueProvider(ControllerContext controllerContext)
+   在 System.Web.Mvc.ControllerBase.get_ValueProvider()
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValue(ControllerContext controllerContext, ParameterDescriptor parameterDescriptor)
+   在 System.Web.Mvc.ControllerActionInvoker.GetParameterValues(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass21.<BeginInvokeAction>b__19(AsyncCallback asyncCallback, Object asyncState)
+********************************************************************************************************************************************
+

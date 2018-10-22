@@ -20,6 +20,8 @@ namespace HKShoppingManage.BLL
 
         #region
         Task<List<Profile>> GetList();
+
+        Task<List<Profile>> GetListByConditions(string name, string idNo, string telNo);
         #endregion
         String GenerateBillNo();
     }

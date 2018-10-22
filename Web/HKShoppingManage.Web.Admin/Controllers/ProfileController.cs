@@ -54,5 +54,12 @@ namespace HKShoppingManage.Web.Admin.Controllers
             var result = await this.bll.GetList();
             return Json(new JsonModelBootstrapTable(result.Count, result));
         }
+
+        [HttpPost]
+        public async Task<JsonResult> GetListByConditions(string name, string idNo, string telNo)
+        {
+            var result = await this.bll.GetListByConditions(name, idNo, telNo);
+            return Json(new JsonModelBootstrapTable(result.Count, result));
+        }
     }
 }

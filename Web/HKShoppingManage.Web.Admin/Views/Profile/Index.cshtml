@@ -128,16 +128,16 @@
     <div class="listinfo">
         <div class="form-inline toolbox">
             <div class="form-group">
-                <span>员工名称</span><input type="text" class="form-control" />
+                <span>员工名称</span><input type="text" class="form-control" id="txtEmpName" />
             </div>
             <div class="form-group">
-                <span>身份证号</span><input type="text" class="form-control" />
+                <span>身份证号</span><input type="text" class="form-control" id="txtEmpIDNo" />
             </div>
             <div class="form-group">
-                <span>身份证号</span><input type="text" class="form-control" />
+                <span>手机号码</span><input type="text" class="form-control" id="txtEmpTelNo" />
             </div>
             <div class="form-group">
-                <a class="btn btn-default btn-sm" href="#"><i class="fa fa-search fa-fw"></i> 查询</a><a class="btn btn-default btn-sm" href="#"><i class="fa fa-upload fa-fw"></i> 导入</a><a class="btn btn-default btn-sm" href="#"><i class="fa fa-download fa-fw"></i> 导出</a>
+                <a class="btn btn-default btn-sm" href="#" id="btnSearch"><i class="fa fa-search fa-fw"></i> 查询</a><a class="btn btn-default btn-sm" href="#" id="btnImport"><i class="fa fa-upload fa-fw"></i> 导入</a><a class="btn btn-default btn-sm" href="#" id="btnExport"><i class="fa fa-download fa-fw"></i> 导出</a>
             </div>
         </div>
         <table class="table table-bordered table-condensed" id="testTB"></table>
@@ -147,10 +147,21 @@
         <script type="text/javascript">
             var cachedCertification = Object.create(null);
             function initTable() {
+                var filterName = $("#txtEmpName").val().trim();
+                var filterIDNo = $("#txtEmpIDNo").val().trim();
+                var filterTelNo = $("#txtEmpTelNo").val().trim();
+
                 $("#testTB").bootstrapTable("destroy");
                 $("#testTB").bootstrapTable({
                     method: "POST",
-                    url: "/Profile/GetList",
+                    url: "/Profile/GetListByConditions",
+                    queryParams: function (params) {
+                        params.name = filterName;
+                        params.idNo = filterIDNo;
+                        params.telNo = filterTelNo;
+                        return params;
+                    },
+                    contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
                     editable: false,//开启编辑模式
                     clickToSelect: false,
                     cache: false,
@@ -200,6 +211,10 @@
                     ]
                 })
             }
+            function refreshTable(data) {
+                $("#testTB").bootstrapTable("destroy");
+                $("#testTB").bootstrapTable("load", data);
+            }
             $(function () {
                 $certification = $("input[name='certification']");
                 $certification.each(function (index, item) {
@@ -243,6 +258,26 @@
                         }
                     })
                 });
+
+                $("#btnSearch").click(function () {
+                    initTable();
+                    //var filterName = $("#txtEmpName").val().trim();
+                    //var filterIDNo = $("#txtEmpIDNo").val().trim();
+                    //var filterTelNo = $("#txtEmpTelNo").val().trim();
+
+                    //$.ajax({
+                    //    type: "POST",
+                    //    url: "/Profile/GetListByConditions",
+                    //    data: { "name": filterName, "idNo": filterIDNo, "telNo": filterTelNo},
+                    //    success: function (data) {
+                    //        debugger
+                    //        refreshTable(data);
+                    //    },
+                    //    fail: function (err) {
+                    //        layer.alert("新增异常:" + err);
+                    //    }
+                    //})
+                })
             });
 
         </script>

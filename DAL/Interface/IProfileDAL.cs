@@ -20,6 +20,8 @@ namespace HKShoppingManage.DAL
 
         #region 查
         Task<List<Profile>> GetList();
+
+        Task<List<Profile>> GetListByConditions(string name, string idNo, string telNo);
         #endregion
 
         string GenerateBillNo();

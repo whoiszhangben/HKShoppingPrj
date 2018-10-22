@@ -108,6 +108,33 @@ namespace HKShoppingManage.DAL
             }
             return list;
         }
+
+        public async Task<List<Profile>> GetListByConditions(string name, string idNo, string telNo)
+        {
+            StringBuilder strSql = new StringBuilder();
+            strSql.Append("select ProfileNo,EmpName,EmpIDNo,EmpTelNo,IsDimissioned,RelationVal from Profiles where 1=1 ");
+            var param = new DynamicParameters();
+            if (!string.IsNullOrEmpty(name))
+            {
+                strSql.Append(" and EmpName like '%" + name + "%' ");
+            }
+            if (!string.IsNullOrEmpty(idNo))
+            {
+                strSql.Append(" and EmpIdNo like '%" + idNo + "%' ");
+            }
+            if (!string.IsNullOrEmpty(telNo))
+            {
+                strSql.Append(" and EmpTelNo like '%" + telNo + "%' ");
+            }
+            List<Profile> list = new List<Profile>();
+            using (var conn = DBConnFactory.CreateSqlConnection())
+            {
+                conn.Open();
+                var tempList = await conn.QueryAsync<Profile>(strSql.ToString());
+                list = tempList.ToList();
+            }
+            return list;
+        }
         #endregion
 
         public string GenerateBillNo()
