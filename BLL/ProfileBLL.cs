@@ -20,18 +20,23 @@ namespace HKShoppingManage.BLL
         {
             return await this.dal.Insert(model);
         }
-        public async Task<List<Profile>> GetList()
+        public async Task<List<Profile>> GetList(string name, string idNo, string telNo, int isDimissioned)
         {
-            return await this.dal.GetList();
+            return await this.dal.GetList(name, idNo, telNo, isDimissioned);
         }
 
-        public async Task<List<Profile>> GetListByConditions(string name, string idNo, string telNo)
+        public async Task<PagedList<Profile>> GetListByConditions(int pageIndex, int pageSize, string name, string idNo, string telNo, int isDimissioned)
         {
-            return await this.dal.GetListByConditions(name, idNo, telNo);
+            return await this.dal.GetListByConditions(pageIndex, pageSize, name, idNo, telNo, isDimissioned);
         }
         public string GenerateBillNo()
         {
             return this.dal.GenerateBillNo();
+        }
+
+        public async Task<bool> Delete(string profileNo)
+        {
+            return await this.dal.Delete(profileNo);
         }
     }
 }

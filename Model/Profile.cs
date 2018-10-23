@@ -13,7 +13,6 @@ namespace HKShoppingManage.Model
         {
             CreateTime = DateTime.Now;
             UpdateTime = DateTime.Now;
-            EmpProfiles = new List<EmpProfileRelation>();
         }
         /// <summary>
         /// 自动增长Id
@@ -49,10 +48,6 @@ namespace HKShoppingManage.Model
         /// </summary>
         public int RelationVal { get; set; }
         /// <summary>
-        /// 员工资料关系
-        /// </summary>
-        public List<EmpProfileRelation> EmpProfiles { get; set; }
-        /// <summary>
         /// 创建时间
         /// </summary>
         public DateTime CreateTime { get; set; }
@@ -68,5 +63,9 @@ namespace HKShoppingManage.Model
         /// 更新人
         /// </summary>
         public string Updator { get; set; }
+        /// <summary>
+        /// 当前标识
+        /// </summary>
+        public int Flag { get; set; }
     }
 }

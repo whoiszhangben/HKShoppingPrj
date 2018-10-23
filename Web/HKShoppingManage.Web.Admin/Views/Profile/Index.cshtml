@@ -3,9 +3,6 @@
     Html.SetActiveMenuItemSystemName("Profile");
 }
 
-@Styles.Render("~/Content/bootstrap-table.min.css")
-@Scripts.Render("~/Scripts/bootstrap-table.min.js")
-@Scripts.Render("~/Scripts/bootstrap-table-zh-CN.js")
 <style type="text/css">
     .containerX span {
         position: relative;
@@ -47,84 +44,90 @@
         margin:5px;
         padding:5px;
     }
+    .hasnot {
+        text-decoration: line-through;
+        color: blue;
+    }
+    .pagination {
+        padding-right: 3px;
+        padding-left: 3px;
+        padding-bottom: 3px;
+        margin: 12px;
+        padding-top: 12px;
+        text-align: right;
+        margin: 0 auto;
+        height: 60px;
+        width: 100%;
+    }
+
+        .pagination a {
+            text-decoration: none;
+            border: solid 1px #AAE;
+            color: #428bca;
+        }
+
+        .pagination a, .pagination span {
+            display: inline-block;
+            padding: 0.3em 0.5em;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .pagination .current {
+            background: #26B;
+            color: #fff;
+            border: solid 1px #AAE;
+        }
+
+            .pagination .current.prev, .pagination .current.next {
+                color: #999;
+                border-color: #999;
+                background: #fff;
+            }
 </style>
 
 <div class="content">
     <div class="panel panel-default">
+        <div class="panel-heading text-center" id="profileheader">
+            新增档案
+        </div>
         <div class="panel-body">
-            <div class="form-group">
-                <div class="col-md-3">
-                    <div class="label-wrapper">
-                        <label for="ProfileNo">档案编号</label>
-                    </div>
+            <div class="form-inline">
+                <div class="form-group">
+                    <span>档案编号</span><input type="text" class="form-control" id="ProfileNo" disabled="disabled" value="@ViewBag.ProfileNo" />
                 </div>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" id="ProfileNo" disabled="disabled" value="@ViewBag.ProfileNo" />
+                <div class="form-group">
+                    <span>员工名称</span><input type="text" class="form-control" id="EmpName" />
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    <div class="label-wrapper">
-                        <label for="EmpName">员工名称</label>
-                    </div>
+                <div class="form-group">
+                    <span>身份证号码</span><input type="text" class="form-control" id="EmpIDNo" />
                 </div>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" id="EmpName" />
+                <div class="form-group">
+                    <span>电话号码</span><input type="text" class="form-control" id="EmpTelNo" />
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    <div class="label-wrapper">
-                        <label for="EmpIDNo">身份证号码</label>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" id="EmpIDNo" />
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-3">
-                    <div class="label-wrapper">
-                        <label for="EmpTelNo">电话号码</label>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <input type="text" class="form-control" id="EmpTelNo" />
-                </div>
-            </div>
-            <div class="form-group" style="margin-top:5px;margin-bottom:5px;">
-                <div class="col-md-3">
-                    <div class="label-wrapper">
-                        <label for="IsDimissioned">是否离职</label>
-                    </div>
-                </div>
-                <div class="col-md-9">
+                <div class="form-group" style="margin-top:15px;margin-bottom:15px;">
+                    <span>是否离职</span>
                     <input name="chk" type="radio" value="0" checked="checked" /> 否
                     <input name="chk" type="radio" value="1" /> 是
                 </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="form-group" style="margin-top:5px;margin-bottom:5px;">
-                <div class="col-md-3">
-                    <label>资料列表</label>
-                </div>
-                <div class="col-md-9">
+                <div class="clearfix"></div>
+                <div class="form-group" style="margin-top:15px;margin-bottom:15px;">
+                    <span>资料列表</span>
                     <span class="containerX">
                         @foreach (var item in ViewBag.CertificationLst)
                         {
-                            <span><input name="certification" type="checkbox" class="input_check" value="@Math.Pow(2.0, double.Parse(item.Key))" id="@item.Key"  data-name="@item.Value" /><label for="@item.Key"></label>&nbsp;@item.Value</span>
+                            <span><input name="certification" type="checkbox" class="input_check" value="@Math.Pow(2.0, double.Parse(item.Key))" id="@item.Key" data-name="@item.Value" /><label for="@item.Key"></label>&nbsp;@item.Value</span>
                         }
                     </span>
                 </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="form-group" style="margin-top:5px;margin-bottom:5px;">
-                <div class="col-md-12 text-center">
+                <div class="form-group text-center">
+                    <input type="hidden" id="addOreditflag" value="0" />
                     <button id="btnSave" class="btn btn-sm btn-primary" style="width:60px;">保存</button>
                 </div>
             </div>
         </div>
     </div>
+    
     <div class="listinfo">
         <div class="form-inline toolbox">
             <div class="form-group">
@@ -137,83 +140,196 @@
                 <span>手机号码</span><input type="text" class="form-control" id="txtEmpTelNo" />
             </div>
             <div class="form-group">
-                <a class="btn btn-default btn-sm" href="#" id="btnSearch"><i class="fa fa-search fa-fw"></i> 查询</a><a class="btn btn-default btn-sm" href="#" id="btnImport"><i class="fa fa-upload fa-fw"></i> 导入</a><a class="btn btn-default btn-sm" href="#" id="btnExport"><i class="fa fa-download fa-fw"></i> 导出</a>
+                <a class="btn btn-default btn-sm" href="javascript:void 0;" id="btnSearch"><i class="fa fa-search fa-fw"></i> 查询</a>
+                <a class="btn btn-default btn-sm" href="javascript:void 0;" id="btnClear"><i class="fa fa-undo fa-fw"></i> 重置</a>
+                <a class="btn btn-default btn-sm" href="javascript:void 0;" id="btnImport"><i class="fa fa-upload fa-fw"></i> 导入</a>
+                <a class="btn btn-default btn-sm" href="javascript:void 0;" id="btnExport"><i class="fa fa-download fa-fw"></i> 导出</a>
             </div>
         </div>
-        <table class="table table-bordered table-condensed" id="testTB"></table>
+
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active">
+                <a href="#duty" data-toggle="tab">
+                    在职
+                </a>
+            </li>
+            <li>
+                <a href="#offduty" data-toggle="tab">
+                    离职
+                </a>
+            </li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="duty">
+                <table class="table table-bordered table-condensed" id="tbduty">
+                    <thead>
+                        <tr>
+                            <th>档案编号</th>
+                            <th>员工名称</th>
+                            <th>身份证号码</th>
+                            <th>电话号码</th>
+                            <th>资料列表</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="PaginationA" class="pagination">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="offduty">
+                <table class="table table-bordered table-condensed" id="tboffduty">
+                    <thead>
+                        <tr>
+                            <th>档案编号</th>
+                            <th>员工名称</th>
+                            <th>身份证号码</th>
+                            <th>电话号码</th>
+                            <th>资料列表</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <div id="PaginationB" class="pagination">
+                </div>
+            </div>
+        </div>
     </div>
-    
+
 </div>
         <script type="text/javascript">
             var cachedCertification = Object.create(null);
-            function initTable() {
-                var filterName = $("#txtEmpName").val().trim();
-                var filterIDNo = $("#txtEmpIDNo").val().trim();
-                var filterTelNo = $("#txtEmpTelNo").val().trim();
+            function initTable($tb) {
+                var addOreditflag = $("#addOreditflag").val();
+                if (addOreditflag == 0) {
+                    $("#profileheader").text("新增档案");
+                } else {
+                    $("#profileheader").text("编辑档案");
+                }
+                var filterName = $("#txtEmpName").val() ? $("#txtEmpName").val().trim() : "";
+                var filterIDNo = $("#txtEmpIDNo").val() ? $("#txtEmpIDNo").val().trim() : "";
+                var filterTelNo = $("#txtEmpTelNo").val() ? $("#txtEmpTelNo").val().trim() : "";
+                var filterDimissioned = ($tb.attr("id") === "tbduty") ? 0 : 1;
 
-                $("#testTB").bootstrapTable("destroy");
-                $("#testTB").bootstrapTable({
-                    method: "POST",
+                pageHelper.Init({
                     url: "/Profile/GetListByConditions",
-                    queryParams: function (params) {
-                        params.name = filterName;
-                        params.idNo = filterIDNo;
-                        params.telNo = filterTelNo;
-                        return params;
-                    },
-                    contentType: 'application/x-www-form-urlencoded;charset=UTF-8',
-                    editable: false,//开启编辑模式
-                    clickToSelect: false,
-                    cache: false,
-                    showToggle: false, //显示切换按钮来切换表/卡片视图。
-                    showPaginationSwitch: false, //显示分页切换按钮
-                    pagination: true,
-                    pageList: [10, 25, 50, 100],
-                    pageSize: 10,
-                    pageNumber: 1,
-                    sidePagination: 'server',
-                    uniqueId: 'Id', //将index列设为唯一索引
-                    striped: false,
-                    search: false,
-                    showRefresh: false,
-                    minimumCountColumns: 2,
-                    smartDisplay: false,
-                    columns: [
-                        { field: "ProfileNo", title: "档案编号", align: "center", sortable: "true" },
-                        { field: "EmpName", title: "员工名称", align: "center", sortable: "true" },
-                        { field: "EmpIDNo", title: "身份证号码", align: "center", sortable: "true" },
-                        { field: "EmpTelNo", title: "电话号码", align: "center", sortable: "true" },
+                    type: "POST",
+                    pageDiv: "#pages",
+                    data:
                         {
-                            field: "IsDimissioned", title: "是否离职", align: "center", sortable: "true", formatter: function (value, row, index) {
-                                return value ? '是' : '否';
-                            }
+                            rId: Math.random(),
+                            name: filterName,
+                            idNo: filterIDNo,
+                            telNo: filterTelNo,
+                            isDimissioned: filterDimissioned
                         },
-                        {
-                            field: "RelationVal", title: "资料列表", align: "center", sortable: "true", formatter: function (value, row, index) {
-                                var strHtml = '', len = Object.getOwnPropertyNames(cachedCertification).length;
-                                for (let i = 0; i < len; i++) {
-                                    if (value & Math.pow(2, i)) {
-                                        strHtml += '<span>' + cachedCertification['id' + i] + '</span>&nbsp;&nbsp;';
-                                    } else {
-                                        strHtml += '<span style="text-decoration:line-through;color:blue;">' + cachedCertification['id' + i] + '</span>&nbsp;&nbsp;';
-                                    }
+                    bind: function (data) {
+                        var strHtml = '';
+                        $(data.Data).each(function (index, dom) {
+                            var trHtml = [
+                                '<tr>',
+                                '   <td>{0}</td>',
+                                '   <td>{1}</td>',
+                                '   <td>{2}</td>',
+                                '   <td>{3}</td>',
+                                '   <td>{4}</td>',
+                                '   <td style="text-align:center;">',
+                                '       <a class="editProfile" data-profileNo=' + dom.ProfileNo + ' data-EmpName=' + dom.EmpName + ' data-EmpIDNo=' + dom.EmpIDNo + ' data-EmpTelNo=' + dom.EmpTelNo + ' data-IsDimissioned=' + dom.IsDimissioned + ' data-RelationVal=' + dom.RelationVal + '><i class="fa fa-pencil fa-fw"></i>编辑</a>',
+                                '       <a class="delProfile" data-profileNo=' + dom.ProfileNo + '><i class="fa fa-trash-o fa-fw"></i>删除</a>',
+                                '   </td>',
+                                '</tr>',
+                            ].join('');
+                            //拼接tbody
+                            strHtml += StringHelper.FormatStr(trHtml,
+                                dom.ProfileNo,
+                                dom.EmpName,
+                                dom.EmpIDNo,
+                                dom.EmpTelNo,
+                                formatInfoList(dom.RelationVal)
+                            );
+                        });
+                        var $active = $('#myTab li.active a');
+                        var containerId = $active.attr("href").substring(1);
+                        var $activeTable = $('#' + containerId).children("table").first();
+                        var $body = $activeTable.children("tbody").first();
+                        $body.html(strHtml);
+
+                        $body.off("click", ".editProfile").on("click", ".editProfile", function () {
+                            var profileNo = $(this).attr("data-profileNo");
+                            var empName = $(this).attr("data-EmpName");
+                            var empIDNo = $(this).attr("data-EmpIDNo");
+                            var empTelNo = $(this).attr("data-EmpTelNo");
+                            var relationVal = parseInt($(this).attr("data-RelationVal"), 10);
+                            var isDimissioned = $(this).attr("data-IsDimissioned");
+                            //当前模式置为编辑模式
+                            $("#addOreditflag").val(1);
+                            $("#profileheader").text("编辑档案");
+                            $("#ProfileNo").val(profileNo);
+                            $("#EmpName").val(empName);
+                            $("#EmpIDNo").val(empIDNo);
+                            $("#EmpTelNo").val(empTelNo);
+                            if (isDimissioned === "false") {
+                                $("input[name='chk'][value='0']").attr("checked", true);
+                            } else {
+                                $("input[name='chk'][value='1']").attr("checked", true);
+                            }
+
+                            var $inputlist = $("input[name='certification']");
+                            $inputlist.each(function (index, item) {
+                                var $this = $(this);
+                                if (relationVal & parseInt($this.val(), 10)) {
+                                    $this.prop("checked", true);
+                                } else {
+                                    $this.prop("checked", false);
                                 }
-                                return strHtml;
-                            }
-                        },
-                        {
-                            field: "action", title: "操作", align: "center", formatter: function (value, row, index) {
-                                var strHtml = '<a href="./index.php?r=subprocess/modify&id=' + row.Id + '"><li class="glyphicon glyphicon-pencil"></li></a>' +
-                                    '<a href="javascript:void(0);" onclick="removeData(' + index + ')" style="margin-left:5px;"><li class="glyphicon glyphicon-remove"></li></a>';
-                                return strHtml;
-                            }, edit: false
-                        }
-                    ]
-                })
+                            });
+                        });
+
+                        $body.off("click", ".delProfile").on("click", ".delProfile", function () {
+                            var profileNo = $(this).attr("data-profileNo");
+                            dialogHelper.Confirm({
+                                content: "您是否确认删除" + profileNo + "这个档案?",
+                                success: function () {
+                                    $.ajax({
+                                        type: 'POST',
+                                        dataType: 'json',
+                                        url: '/Profile/Delete',
+                                        data: {
+                                            profileNo: profileNo
+                                        },
+                                        success: function (data, textStatus) {
+                                            $certification = $("input[name='certification']");
+                                            $certification.each(function (index, item) {
+                                                var $this = $(this);
+                                                cachedCertification['id' + $this.attr('id')] = $this.attr('data-name');
+                                            });
+
+                                            var $active = $('#myTab a:first');
+                                            var containerId = $active.attr("href").substring(1);
+                                            var $activeTable = $('#' + containerId).children("table").first();
+                                            initTable($activeTable);
+                                            $active.tab('show');
+                                        }
+                                    });
+                                }
+                            });
+                        });
+                    },
+                    pageId: ($tb.attr("id") === "tbduty") ? "PaginationA" :"PaginationB"
+                });
             }
-            function refreshTable(data) {
-                $("#testTB").bootstrapTable("destroy");
-                $("#testTB").bootstrapTable("load", data);
+
+            function formatInfoList(value) {
+                var strHtml = '', len = Object.getOwnPropertyNames(cachedCertification).length;
+                for (let i = 0; i < len; i++) {
+                    if (value & Math.pow(2, i)) {
+                        strHtml += '<span>' + cachedCertification['id' + i] + '</span>&nbsp;&nbsp;';
+                    } else {
+                        strHtml += '<span class=hasnot>' + cachedCertification['id' + i] + '</span>&nbsp;&nbsp;';
+                    }
+                }
+                return strHtml;
             }
             $(function () {
                 $certification = $("input[name='certification']");
@@ -221,13 +337,28 @@
                     var $this = $(this);
                     cachedCertification['id' + $this.attr('id')] = $this.attr('data-name');
                 });
-                initTable();
+
+                var $active = $('#myTab a:first');
+                var containerId = $active.attr("href").substring(1);
+                var $activeTable = $('#'+containerId).children("table").first();
+                initTable($activeTable);
+                $active.tab('show');
+
+                $('#myTab a').click(function (e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    var containerId = $this.attr("href").substring(1);
+                    var $selectTable = $('#' + containerId).children("table").first();
+                    initTable($selectTable);
+                    $this.tab('show');
+                })
 
                 $("#btnSave").click(function () {
-                    var $ProfileNo = $("#ProfileNo").val().trim();
-                    var $EmpName = $("#EmpName").val().trim();
-                    var $EmpIDNo = $("#EmpIDNo").val().trim();
-                    var $EmpTelNo = $("#EmpTelNo").val().trim();
+                    var $ProfileNo = $("#ProfileNo").val() ? $("#ProfileNo").val().trim() : "";
+                    var $EmpName = $("#EmpName").val() ? $("#EmpName").val().trim() : "";
+                    var $EmpIDNo = $("#EmpIDNo").val() ? $("#EmpIDNo").val().trim() : "";
+                    var $EmpTelNo = $("#EmpTelNo").val() ? $("#EmpTelNo").val().trim() : "";
+                    var $flag = $("#addOreditflag").val();
                     var $IsDimission = $("input[name='chk']:checked").val() == "1" ? true : false;
 
                     var $certification = $("input[name='certification']");
@@ -241,16 +372,16 @@
                     var $RelationVal = combineType;
                     $.ajax({
                         type: "POST",
-                        url: "/Profile/Add",
-                        data: { "ProfileNo": $ProfileNo, "EmpName": $EmpName, "EmpIDNo": $EmpIDNo, "EmpTelNo": $EmpTelNo, "IsDimissioned": $IsDimission, "RelationVal": $RelationVal },
+                        url: "/Profile/AddOrEdit",
+                        data: { "ProfileNo": $ProfileNo, "EmpName": $EmpName, "EmpIDNo": $EmpIDNo, "EmpTelNo": $EmpTelNo, "IsDimissioned": $IsDimission, "RelationVal": $RelationVal, "Flag": $flag },
                         success: function (data) {
                             debugger
                             if (data.IsSuccess) {
-                                layer.alert("新增成功", function () {
+                                layer.alert(data.Data, function () {
                                     location.reload(true);
                                 });
                             } else {
-                                layer.alert("新增失败");
+                                layer.alert(data.Data);
                             }
                         },
                         fail: function (err) {
@@ -260,24 +391,33 @@
                 });
 
                 $("#btnSearch").click(function () {
-                    initTable();
-                    //var filterName = $("#txtEmpName").val().trim();
-                    //var filterIDNo = $("#txtEmpIDNo").val().trim();
-                    //var filterTelNo = $("#txtEmpTelNo").val().trim();
+                    var $active = $('#myTab li.active a');
+                    var containerId = $active.attr("href").substring(1);
+                    var $activeTable = $('#' + containerId).children("table").first();
+                    initTable($activeTable);
+                });
 
-                    //$.ajax({
-                    //    type: "POST",
-                    //    url: "/Profile/GetListByConditions",
-                    //    data: { "name": filterName, "idNo": filterIDNo, "telNo": filterTelNo},
-                    //    success: function (data) {
-                    //        debugger
-                    //        refreshTable(data);
-                    //    },
-                    //    fail: function (err) {
-                    //        layer.alert("新增异常:" + err);
-                    //    }
-                    //})
-                })
+                $("#btnClear").click(function () {
+                    $("#txtEmpName").val("");
+                    $("#txtEmpIDNo").val("");
+                    $("#txtEmpTelNo").val("");
+                    var $active = $('#myTab li.active a');
+                    var containerId = $active.attr("href").substring(1);
+                    var $activeTable = $('#' + containerId).children("table").first();
+                    initTable($activeTable);
+                });
+
+                $("#btnExport").click(function () {
+                    var filterName = $("#txtEmpName").val() ? $("#txtEmpName").val().trim() : "";
+                    var filterIDNo = $("#txtEmpIDNo").val() ? $("#txtEmpIDNo").val().trim() : "";
+                    var filterTelNo = $("#txtEmpTelNo").val() ? $("#txtEmpTelNo").val().trim() : "";
+
+                    var $active = $('#myTab li.active a');
+                    var containerId = $active.attr("href").substring(1);
+                    var filterDimissioned = (containerId === "duty") ? 0 : 1;
+
+                    window.location.href = "/Profile/ExportToExcel?name=" + filterName + "&idNo=" + filterIDNo + "&telNo=" + filterTelNo + "&isDimissioned=" + filterDimissioned;
+                });
             });
 
         </script>

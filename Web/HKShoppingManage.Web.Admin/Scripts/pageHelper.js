@@ -20,6 +20,7 @@ var $PageParam = {};
         dataType: "json",
         bind: function (data) { },
         completed: function () { },
+        pageId: "Pagination"
     };
     //其他全局参数
     var pageCount = 1;
@@ -73,7 +74,7 @@ var $PageParam = {};
                     }
 
                     if (opt.initFlag) {
-                        $("#Pagination").pagination(data.TotalCount, {
+                        $("#" + opt.pageId).pagination(data.TotalCount, {
                             items_per_page: data.PageSize,
                             num_edge_entries: 1,
                             num_display_entries: 8,
@@ -81,45 +82,45 @@ var $PageParam = {};
                         });
                         opt.initFlag = false;
                     }
-                    ////分页拼接
-                    //var page = $(opt.pageDiv);
-                    //page.html("");
-                    //$('<li>共' + data.TotalCount + '条记录</li>').appendTo(page);
-                    //if (data.PageIndex === 1) {
-                    //    $('<li><<</li>').appendTo(page);
-                    //} else {
-                    //    $('<li><a href="javascript:void(0);"><<</a></li>').unbind("click").bind("click",
-                    //    function () {
-                    //        if (data.HasPreviousPage) {
-                    //            goPage(data.PageIndex - 1);
-                    //        }
-                    //        return;
-                    //    }).appendTo(page);
-                    //}
+                    //分页拼接
+                    var page = $(opt.pageDiv);
+                    page.html("");
+                    $('<li>共' + data.TotalCount + '条记录</li>').appendTo(page);
+                    if (data.PageIndex === 1) {
+                        $('<li><<</li>').appendTo(page);
+                    } else {
+                        $('<li><a href="javascript:void(0);"><<</a></li>').unbind("click").bind("click",
+                        function () {
+                            if (data.HasPreviousPage) {
+                                goPage(data.PageIndex - 1);
+                            }
+                            return;
+                        }).appendTo(page);
+                    }
 
-                    //for (var i = 1; i <= data.TotalPages; i++) {
-                    //    if (i === data.PageIndex) {
-                    //        $('<li><a href="javascript:void(0);" class="select">' + i + '</a></li>').appendTo(page);
-                    //    } else {
-                    //        $('<li><a href="javascript:void(0);">' + i + '</a></li>').bind('click', { pageIndex: i }, function (event) {
-                    //            goPage(event.data.pageIndex);
-                    //            return;
-                    //        }).appendTo(page);
-                    //    }
-                    //}
+                    for (var i = 1; i <= data.TotalPages; i++) {
+                        if (i === data.PageIndex) {
+                            $('<li><a href="javascript:void(0);" class="select">' + i + '</a></li>').appendTo(page);
+                        } else {
+                            $('<li><a href="javascript:void(0);">' + i + '</a></li>').bind('click', { pageIndex: i }, function (event) {
+                                goPage(event.data.pageIndex);
+                                return;
+                            }).appendTo(page);
+                        }
+                    }
 
-                    //if (data.PageIndex == data.TotalPages) {
-                    //    //下一页
-                    //    $('<li>>></li>').appendTo(page);
-                    //} else {
-                    //    //下一页
-                    //    $('<li><a href="javascript:void(0);">>></a></li>').bind('click', function () {
-                    //        if (data.HasNextPage) {
-                    //            goPage(data.PageIndex + 1);
-                    //        }
-                    //        return;
-                    //    }).appendTo(page);
-                    //}
+                    if (data.PageIndex == data.TotalPages) {
+                        //下一页
+                        $('<li>>></li>').appendTo(page);
+                    } else {
+                        //下一页
+                        $('<li><a href="javascript:void(0);">>></a></li>').bind('click', function () {
+                            if (data.HasNextPage) {
+                                goPage(data.PageIndex + 1);
+                            }
+                            return;
+                        }).appendTo(page);
+                    }
                 }
             },
             //失败，提示

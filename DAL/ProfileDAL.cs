@@ -29,48 +29,44 @@ namespace HKShoppingManage.DAL
 
                 try
                 {
+                    #region Profiles
                     StringBuilder strSql = new StringBuilder();
                     var param = new DynamicParameters();
-
-                    #region Profiles
-                    strSql.Append("insert into Profiles(");
-                    strSql.Append("ProfileNo,EmpName,EmpIDNo,EmpTelNo,IsDimissioned,RelationVal,CreateTime,Creator,UpdateTime,Updator)");
-
-                    strSql.Append(" values (");
-                    strSql.Append("@ProfileNo,@EmpName,@EmpIDNo,@EmpTelNo,@IsDimissioned,@RelationVal,@CreateTime,@Creator,@UpdateTime,@Updator)");
-                    strSql.Append(";SELECT @returnid=SCOPE_IDENTITY()");
-
-                    param.Add("@ProfileNo", model.ProfileNo, dbType: DbType.String);
-                    param.Add("@EmpName", model.EmpName, dbType: DbType.String);
-                    param.Add("@EmpIDNo", model.EmpIDNo, dbType: DbType.String);
-                    param.Add("@EmpTelNo", model.EmpTelNo, dbType: DbType.String);
-                    param.Add("@IsDimissioned", model.IsDimissioned, dbType: DbType.Boolean);
-                    param.Add("@RelationVal", model.RelationVal, dbType: DbType.Int32);
-                    param.Add("@CreateTime", model.CreateTime, dbType: DbType.DateTime);
-                    param.Add("@Creator", model.Creator, dbType: DbType.String);
-                    param.Add("@UpdateTime", model.UpdateTime, dbType: DbType.DateTime);
-                    param.Add("@Updator", model.Updator, dbType: DbType.String);
-                    param.Add("@returnid", dbType: DbType.Int32, direction: ParameterDirection.Output);
-                    await conn.ExecuteAsync(strSql.ToString(), param, tran);
-                    result = param.Get<int>("@returnid");
-
-                    //根据RelationVal 向关系中插入关联数据 
-                    for (int i = 0; i < 10; i++)
+                    if (model.Flag == 0)
                     {
-                        if ((model.RelationVal & (int)Math.Pow(2.0,(double)i)) != 0)
-                        {
-                            strSql.Clear();
-                            param = new DynamicParameters();
-                            strSql.Append("insert into EmpProfileRelation(");
-                            strSql.Append("ProfileId,InfoId,Remark)");
+                        strSql.Append("insert into Profiles(");
+                        strSql.Append("ProfileNo,EmpName,EmpIDNo,EmpTelNo,IsDimissioned,RelationVal,CreateTime,Creator,UpdateTime,Updator)");
 
-                            strSql.Append(" values (");
-                            strSql.Append("@ProfileId,@InfoId,@Remark);");
-                            param.Add("@ProfileId", result, dbType: DbType.Int32);
-                            param.Add("@InfoId", i, dbType: DbType.Int32);
-                            param.Add("@Remark", "", dbType: DbType.String);
-                            await conn.ExecuteAsync(strSql.ToString(), param, tran);
-                        }
+                        strSql.Append(" values (");
+                        strSql.Append("@ProfileNo,@EmpName,@EmpIDNo,@EmpTelNo,@IsDimissioned,@RelationVal,@CreateTime,@Creator,@UpdateTime,@Updator)");
+                        strSql.Append(";SELECT @returnid=SCOPE_IDENTITY()");
+
+                        param.Add("@ProfileNo", model.ProfileNo, dbType: DbType.String);
+                        param.Add("@EmpName", model.EmpName, dbType: DbType.String);
+                        param.Add("@EmpIDNo", model.EmpIDNo, dbType: DbType.String);
+                        param.Add("@EmpTelNo", model.EmpTelNo, dbType: DbType.String);
+                        param.Add("@IsDimissioned", model.IsDimissioned, dbType: DbType.Boolean);
+                        param.Add("@RelationVal", model.RelationVal, dbType: DbType.Int32);
+                        param.Add("@CreateTime", model.CreateTime, dbType: DbType.DateTime);
+                        param.Add("@Creator", model.Creator, dbType: DbType.String);
+                        param.Add("@UpdateTime", model.UpdateTime, dbType: DbType.DateTime);
+                        param.Add("@Updator", model.Updator, dbType: DbType.String);
+                        param.Add("@returnid", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                        await conn.ExecuteAsync(strSql.ToString(), param, tran);
+                        result = param.Get<int>("@returnid");
+                    }
+                    else
+                    {
+                        strSql.Append("Update Profiles set EmpName = @EmpName, EmpIDNo = @EmpIDNo, EmpTelNo = @EmpTelNo, IsDimissioned = @IsDimissioned, RelationVal = @RelationVal where ProfileNo = @ProfileNo ");
+                        param.Add("@ProfileNo", model.ProfileNo, dbType: DbType.String);
+                        param.Add("@EmpName", model.EmpName, dbType: DbType.String);
+                        param.Add("@EmpIDNo", model.EmpIDNo, dbType: DbType.String);
+                        param.Add("@EmpTelNo", model.EmpTelNo, dbType: DbType.String);
+                        param.Add("@IsDimissioned", model.IsDimissioned, dbType: DbType.Boolean);
+                        param.Add("@RelationVal", model.RelationVal, dbType: DbType.Int32);
+                        param.Add("@UpdateTime", model.UpdateTime, dbType: DbType.DateTime);
+                        param.Add("@Updator", model.Updator, dbType: DbType.String);
+                        result = await conn.ExecuteAsync(strSql.ToString(), param, tran);
                     }
                     #endregion
 
@@ -78,7 +74,7 @@ namespace HKShoppingManage.DAL
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.Log.WriteError("[回滚]新增档案出错", ex);
+                    LogHelper.Log.WriteError("[回滚]新增或更新档案出错", ex);
                     tran.Rollback();
                 }
                 finally
@@ -94,46 +90,80 @@ namespace HKShoppingManage.DAL
         }
         #endregion
         #region
-        public async Task<List<Profile>> GetList()
+        public async Task<List<Profile>> GetList(string name, string idNo, string telNo, int isDimissioned)
         {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ProfileNo,EmpName,EmpIDNo,EmpTelNo,IsDimissioned,RelationVal from Profiles");
+            StringBuilder strFilter = new StringBuilder();
+            var param = new DynamicParameters();
+            strFilter.Append(" And IsDimissioned = " + isDimissioned.ToString());
 
+            if (!string.IsNullOrEmpty(name))
+            {
+                strFilter.Append(" and EmpName like '%" + name + "%' ");
+            }
+            if (!string.IsNullOrEmpty(idNo))
+            {
+                strFilter.Append(" and EmpIdNo like '%" + idNo + "%' ");
+            }
+            if (!string.IsNullOrEmpty(telNo))
+            {
+                strFilter.Append(" and EmpTelNo like '%" + telNo + "%' ");
+            }
             List<Profile> list = new List<Profile>();
             using (var conn = DBConnFactory.CreateSqlConnection())
             {
                 conn.Open();
-                var tempList = await conn.QueryAsync<Profile>(strSql.ToString());
-                list = tempList.ToList();
+                param.Add("@Tables", "[Profiles]", dbType: DbType.String);
+                param.Add("@PK", "[Id]", dbType: DbType.String);
+                param.Add("@Sort", "[CreateTime]", dbType: DbType.String);
+                param.Add("@PageNumber", 1, dbType: DbType.Int32);
+                param.Add("@PageSize", 10000, dbType: DbType.Int32);
+                param.Add("@Fields", "ProfileNo,EmpName,EmpIDNo,EmpTelNo,RelationVal ", dbType: DbType.String);
+                param.Add("@Filter", strFilter.ToString(), dbType: DbType.String);
+                param.Add("@isCount", true, dbType: DbType.Boolean);
+                param.Add("@Total", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var temp = await conn.QueryAsync<Profile>("Proc_CommonPagingStoredProcedure", param, commandType: CommandType.StoredProcedure);
+                list = temp.ToList();
             }
             return list;
         }
 
-        public async Task<List<Profile>> GetListByConditions(string name, string idNo, string telNo)
+        public async Task<PagedList<Profile>> GetListByConditions(int pageIndex, int pageSize, string name, string idNo, string telNo, int isDimissioned)
         {
-            StringBuilder strSql = new StringBuilder();
-            strSql.Append("select ProfileNo,EmpName,EmpIDNo,EmpTelNo,IsDimissioned,RelationVal from Profiles where 1=1 ");
+            int totalCount = 0;
+            StringBuilder strFilter = new StringBuilder();
             var param = new DynamicParameters();
+            strFilter.Append(" And IsDimissioned = " + isDimissioned.ToString() );
+
             if (!string.IsNullOrEmpty(name))
             {
-                strSql.Append(" and EmpName like '%" + name + "%' ");
+                strFilter.Append(" and EmpName like '%" + name + "%' ");
             }
             if (!string.IsNullOrEmpty(idNo))
             {
-                strSql.Append(" and EmpIdNo like '%" + idNo + "%' ");
+                strFilter.Append(" and EmpIdNo like '%" + idNo + "%' ");
             }
             if (!string.IsNullOrEmpty(telNo))
             {
-                strSql.Append(" and EmpTelNo like '%" + telNo + "%' ");
+                strFilter.Append(" and EmpTelNo like '%" + telNo + "%' ");
             }
             List<Profile> list = new List<Profile>();
             using (var conn = DBConnFactory.CreateSqlConnection())
             {
                 conn.Open();
-                var tempList = await conn.QueryAsync<Profile>(strSql.ToString());
-                list = tempList.ToList();
+                param.Add("@Tables", "[Profiles]", dbType: DbType.String);
+                param.Add("@PK", "[Id]", dbType: DbType.String);
+                param.Add("@Sort", "[CreateTime]", dbType: DbType.String);
+                param.Add("@PageNumber", pageIndex, dbType: DbType.Int32);
+                param.Add("@PageSize", pageSize, dbType: DbType.Int32);
+                param.Add("@Fields", "ProfileNo,EmpName,EmpIDNo,EmpTelNo,RelationVal,IsDimissioned,CreateTime ", dbType: DbType.String);
+                param.Add("@Filter", strFilter.ToString(), dbType: DbType.String);
+                param.Add("@isCount", true, dbType: DbType.Boolean);
+                param.Add("@Total", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                var temp = await conn.QueryAsync<Profile>("Proc_CommonPagingStoredProcedure", param, commandType: CommandType.StoredProcedure);
+                list = temp.ToList();
+                totalCount = param.Get<int>("@Total");
             }
-            return list;
+            return new PagedList<Profile>(list, pageIndex, pageSize, totalCount);
         }
         #endregion
 
@@ -149,6 +179,32 @@ namespace HKShoppingManage.DAL
                 BillNo = param.Get<string>("@BillNo");
             }
             return BillNo;
+        }
+
+        public async Task<bool> Delete(string profileNo)
+        {
+            bool result = true;
+            using (var conn = DBConnFactory.CreateSqlConnection())
+            {
+                conn.Open();
+                var tran = conn.BeginTransaction();
+                try
+                {
+                    var param = new DynamicParameters();
+                    StringBuilder strSql = new StringBuilder();
+                    strSql.Append("Delete from Profiles where ProfileNo = @ProfileNo ");
+                    param.Add("@ProfileNo", profileNo, dbType: DbType.String);
+                    await conn.ExecuteAsync(strSql.ToString(), param, tran);
+                    tran.Commit();
+                }
+                catch (Exception ex)
+                {
+                    result = false;
+                    LogHelper.Log.WriteError("[回滚]删除档案出错", ex);
+                    tran.Rollback();
+                }
+            }
+            return result;
         }
     }
 }

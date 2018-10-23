@@ -19,11 +19,13 @@ namespace HKShoppingManage.DAL
         #endregion
 
         #region 查
-        Task<List<Profile>> GetList();
+        Task<List<Profile>> GetList(string name, string idNo, string telNo, int isDimissioned);
 
-        Task<List<Profile>> GetListByConditions(string name, string idNo, string telNo);
+        Task<PagedList<Profile>> GetListByConditions(int pageIndex, int pageSize, string name, string idNo, string telNo, int isDimissioned);
         #endregion
 
         string GenerateBillNo();
+
+        Task<bool> Delete(string profileNo);
     }
 }
